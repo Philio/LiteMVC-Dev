@@ -1,0 +1,7 @@
+<phpunit>
+  <testsuites>
+    <testsuite name="LiteMVC">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

@@ -146,8 +146,8 @@ abstract class AbstractDriver extends \PDO {
 		return parent::query(sprintf(
 			"
 			SELECT t0.constraint_name, t1.column_name, t0.constraint_type
-			FROM information_schema.table_constraints t0
-			LEFT JOIN information_schema.key_column_usage t1
+			FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS t0
+			LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE t1
 			ON t0.constraint_catalog = t1.constraint_catalog
 			AND t0.constraint_schema = t1.constraint_schema
 			AND t0.constraint_name = t1.constraint_name

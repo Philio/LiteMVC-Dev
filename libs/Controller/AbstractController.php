@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LiteMVC Application Framework
  * 
@@ -10,8 +11,9 @@
  * @package LiteMVC
  * @version 0.4.0-dev
  */
+
 namespace LiteMVC\Controller;
 
 abstract class AbstractController {
-	
+    
 }

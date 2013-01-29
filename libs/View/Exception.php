@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LiteMVC Application Framework
  * 
@@ -10,6 +11,9 @@
  * @package LiteMVC
  * @version 0.4.0-dev
  */
+
 namespace LiteMVC\View;
 
-class Exception extends \Exception {}
+class Exception extends \Exception {
+    
+}

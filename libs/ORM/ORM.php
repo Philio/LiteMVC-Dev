@@ -15,6 +15,7 @@
 namespace LiteMVC\ORM;
 
 class ORM {
+
     /**
      * Column data types
      * 

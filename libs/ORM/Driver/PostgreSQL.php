@@ -31,7 +31,7 @@ class PostgreSQL extends AbstractDriver {
 	}
 
 	/**
-	 * Map column type returned by the database to a simple type defined in TYPE_* constants
+	 * Map column type returned by the database to ORM constant
 	 * 
 	 * @param string $type
 	 * @param int $precision
@@ -39,9 +39,26 @@ class PostgreSQL extends AbstractDriver {
 	 */
 	protected function _mapColumnType($type, $precision) {
 		if (is_numeric($precision)) {
-			return ORM::COL_TYPE_INT;
+			return ORM::COL_INTEGER;
 		} else {
-			return ORM::COL_TYPE_STR;
+			return ORM::COL_STRING;
+		}
+	}
+	
+	/**
+	 * Map key type returned by the database to ORM constant
+	 * 
+	 * @param string $type
+	 * @return int
+	 */
+	protected function _mapKeyType($type) {
+		switch ($type) {
+			case 'PRIMARY KEY':
+				return ORM::KEY_PRIMARY;
+			case 'FOREIGN KEY':
+				return ORM::KEY_FOREIGN;
+			default:
+				return null;
 		}
 	}
 

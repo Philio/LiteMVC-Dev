@@ -95,16 +95,16 @@ abstract class AbstractDriver extends \PDO {
 	protected function _getInfomationSchemaColumns($table) {
 		return parent::query(sprintf(
 			"
-				SELECT column_name, data_type, numeric_precision, is_nullable, column_default
-				FROM INFORMATION_SCHEMA.COLUMNS
-				WHERE table_name = '%s'
+			SELECT column_name, data_type, numeric_precision, is_nullable, column_default
+			FROM INFORMATION_SCHEMA.COLUMNS
+			WHERE table_name = '%s'
 			",
 			$table
 		), \PDO::FETCH_ASSOC);
 	}
 	
 	/**
-	 * Map column type returned by the database to a simple type defined in TYPE_* constants
+	 * Map column type returned by the database to ORM constant
 	 * 
 	 * @param string $type
 	 * @param int $precision
@@ -118,7 +118,22 @@ abstract class AbstractDriver extends \PDO {
 	 * @param string $table
 	 */
 	public function getKeys($table) {
+		// Get column data from the database
 		$keys = $this->_getInformationSchemaKeys($table);
+		
+		// Format and return keys
+		$formatted = array();
+		foreach ($keys as $key) {
+			$type = $this->_mapKeyType($key['constraint_type']);
+			if (is_null($type)) {
+				continue;
+			}
+			$formatted[$key['constraint_name']] = array(
+				'column' => $key['column_name'],
+				'type' => $type
+			);
+		}
+		return $formatted;
 	}
 	
 	/**
@@ -130,16 +145,24 @@ abstract class AbstractDriver extends \PDO {
 	protected function _getInformationSchemaKeys($table) {
 		return parent::query(sprintf(
 			"
-				SELECT t0.constraint_name, t0.constraint_type, t1.column_name
-				FROM information_schema.table_constraints t0
-				LEFT JOIN information_schema.key_column_usage t1
-				ON t0.constraint_catalog = t1.constraint_catalog
-				AND t0.constraint_schema = t1.constraint_schema
-				AND t0.constraint_name = t1.constraint_name
-				WHERE t0.table_name = '%s'
+			SELECT t0.constraint_name, t1.column_name, t0.constraint_type
+			FROM information_schema.table_constraints t0
+			LEFT JOIN information_schema.key_column_usage t1
+			ON t0.constraint_catalog = t1.constraint_catalog
+			AND t0.constraint_schema = t1.constraint_schema
+			AND t0.constraint_name = t1.constraint_name
+			WHERE t0.table_name = '%s'
 			",
 			$table
 		), \PDO::FETCH_ASSOC);
 	}
+	
+	/**
+	 * Map key type returned by the database to ORM constant
+	 * 
+	 * @param string $type
+	 * @return int
+	 */
+	abstract protected function _mapKeyType($type);
 	
 }

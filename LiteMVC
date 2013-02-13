@@ -1,0 +1,6 @@
+#!/usr/bin/php
+<?php
+require_once 'libs/LiteMVC/Autoloader/Classmap.php';
+new LiteMVC\Autoloader\Classmap();
+
+$cli = new LiteMVC\CLI\CLI($argv);

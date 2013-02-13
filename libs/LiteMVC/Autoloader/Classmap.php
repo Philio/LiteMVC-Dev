@@ -22,6 +22,10 @@ class Classmap {
      * @var array 
      */
     protected $_map = array(
+        'LiteMVC\CLI\CLI' => '/CLI/CLI.php',
+        'LiteMVC\CLI\Module\AbstractModule' => '/CLI/Module/AbstractModule.php',
+        'LiteMVC\CLI\Module\App' => '/CLI/Module/App.php',
+        'LiteMVC\CLI\Module\Info' => '/CLI/Module/Info.php',
         'LiteMVC\Controller\AbstractController' => '/Controller/AbstractController.php',
         'LiteMVC\Controller\Exception' => '/Controller/Exception.php',
         'LiteMVC\Model\AbstractModel' => '/Model/AbstractModel.php',
@@ -34,6 +38,13 @@ class Classmap {
         'LiteMVC\View\AbstractView' => '/View/AbstractView.php',
         'LiteMVC\View\Exception' => '/View/Exception.php',
     );
+    
+    /**
+     * A lowercase representation of the class map
+     *
+     * @var array
+     */
+    private $_lcMap = array();
 
     /**
      * Root director for the framework files
@@ -43,12 +54,20 @@ class Classmap {
     protected $_root;
 
     /**
-     * Set the root director and register the autoloader
+     * Setup and register the autoloader
      * 
      * @param boolean $autoRegister
      */
     public function __construct($autoRegister = true) {
+        // Set root directory
         $this->_root = realpath(__DIR__ . '/../');
+        
+        // Create lowercase map for better matching
+        array_walk($this->_map, function($value, $key) {
+            $this->_lcMap[strtolower($key)] = $value;
+        });
+        
+        // Register the autoloader
         if ($autoRegister) {
             $this->register();
         }
@@ -74,8 +93,8 @@ class Classmap {
      * @param string $class
      */
     public function load($class) {
-        if (isset($this->_map[$class])) {
-            require_once $this->_root . $this->_map[$class];
+        if (isset($this->_lcMap[strtolower($class)])) {
+            require_once $this->_root . $this->_lcMap[strtolower($class)];
         }
     }
 

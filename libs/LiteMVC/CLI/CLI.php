@@ -74,10 +74,10 @@ class CLI {
             if (isset($argv[2]) && method_exists($module, $argv[2])) {
                 echo $module->$argv[2](array_slice($argv, 2));
             } else {
-                echo $this->_help(strtolower($argv[1]));
+                $this->_showHelp(strtolower($argv[1]));
             }
         } else {
-            echo $this->_help();
+            $this->_showHelp();
         }
     }
 
@@ -90,7 +90,7 @@ class CLI {
     public function colorise($text, $color) {
         return $color . $text . self::COLOR_TERMINATOR;
     }
-    
+
     /**
      * Show help entry
      * 
@@ -101,16 +101,24 @@ class CLI {
      * @param array $optParams
      */
     public function showHelpEntry($moduleName, $actionName, $desc = null, array $reqParams = array(), array $optParams = array()) {
+        // Merge all required params
         $req = array_merge(array(self::CMD, $moduleName, $actionName), $reqParams);
+        
+        // Show required params in green
         $reqFmt = count($optParams) ? '%s' : '%-30s';
         echo $this->colorise(sprintf($reqFmt, implode(' ', $req)), self::COLOR_LIGHT_GREEN);
+        
+        // Show optional params in cyan
         if (count($optParams)) {
             $optFmt = strlen(implode(' ', $req) . ' ') < 30 ? '%-' . (30 - strlen(implode(' ', $req) . ' ')) . 's' : '%s'; 
             echo ' ' . $this->colorise(sprintf($optFmt, implode(' ', $optParams)), self::COLOR_LIGHT_CYAN);
         }
+        
+        // Show description in white
         if ($desc) {
             echo ' ' . $this->colorise($desc, self::COLOR_WHITE);
         }
+        
         echo PHP_EOL . PHP_EOL;
     }
     
@@ -126,13 +134,13 @@ class CLI {
             '| |___| | ||  __/ |  | | \ V /| |___' . PHP_EOL .
             '|_____|_|\__\___|_|  |_|  \_/  \____|' . PHP_EOL . PHP_EOL;
     }
-
+    
     /**
      * Show help
      * 
      * @param string $moduleName
      */
-    private function _help($moduleName = null) {
+    private function _showHelp($moduleName = null) {
         // Show usage
         echo $this->colorise('Usage:', self::COLOR_YELLOW) . PHP_EOL . PHP_EOL;
         $this->showHelpEntry('<module name>', '<action name>', null, array('[required params]'), array('[optional params]'));
@@ -151,5 +159,5 @@ class CLI {
             }
         }
     }
-    
+
 }

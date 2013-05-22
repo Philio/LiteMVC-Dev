@@ -26,6 +26,7 @@ class Classmap {
         'LiteMVC\CLI\Module\AbstractModule' => '/CLI/Module/AbstractModule.php',
         'LiteMVC\CLI\Module\App' => '/CLI/Module/App.php',
         'LiteMVC\CLI\Module\Info' => '/CLI/Module/Info.php',
+        'LiteMVC\Config\Config' => '/Config/Config.php',
         'LiteMVC\Controller\AbstractController' => '/Controller/AbstractController.php',
         'LiteMVC\Controller\Exception' => '/Controller/Exception.php',
         'LiteMVC\Model\AbstractModel' => '/Model/AbstractModel.php',
@@ -35,6 +36,8 @@ class Classmap {
         'LiteMVC\ORM\Driver\MySQL' => '/ORM/Driver/MySQL.php',
         'LiteMVC\ORM\Driver\PostgreSQL' => '/ORM/Driver/PostgreSQL.php',
         'LiteMVC\ORM\ORM' => '/ORM/ORM.php',
+        'LiteMVC\Resource\AbstractDataset' => '/Resource/AbstractDataset.php',
+        'LiteMVC\Resource\AbstractResource' => '/Resource/AbstractResource.php',
         'LiteMVC\View\AbstractView' => '/View/AbstractView.php',
         'LiteMVC\View\Exception' => '/View/Exception.php',
     );

@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  * 
- * Abstract View
+ * Config parser
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,10 +12,10 @@
  * @version 0.4.0-dev
  */
 
-namespace LiteMVC\View;
+namespace LiteMVC\Config;
 
 use LiteMVC\Resource;
 
-abstract class AbstractView extends Resource\AbstractDataset {
-    
+class Config extends Resource\AbstractDataset {
+
 }

@@ -97,9 +97,9 @@ abstract class AbstractDriver extends \PDO {
     protected function _getInfomationSchemaColumns($table) {
         return parent::query(sprintf(
             "
-			SELECT column_name, data_type, numeric_precision, is_nullable, column_default
-			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE table_name = '%s'
+            SELECT column_name, data_type, numeric_precision, is_nullable, column_default
+            FROM INFORMATION_SCHEMA.COLUMNS
+            WHERE table_name = '%s'
 			",
             $table
         ), \PDO::FETCH_ASSOC);

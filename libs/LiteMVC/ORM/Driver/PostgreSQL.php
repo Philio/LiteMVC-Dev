@@ -41,7 +41,7 @@ class PostgreSQL extends AbstractDriver {
      */
     protected function _mapColumnType($type, $precision) {
         if (is_numeric($precision)) {
-            return ORM::COL_INTEGER;
+            return ORM::COL_NUMERIC;
         } else {
             return ORM::COL_STRING;
         }

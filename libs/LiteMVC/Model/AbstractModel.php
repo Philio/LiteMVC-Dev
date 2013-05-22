@@ -14,6 +14,8 @@
 
 namespace LiteMVC\Model;
 
-abstract class AbstractModel {
+use LiteMVC\Resource;
+
+abstract class AbstractModel extends Resource\AbstractDataset {
     
 }

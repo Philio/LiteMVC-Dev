@@ -14,6 +14,8 @@
 
 namespace LiteMVC\Controller;
 
-abstract class AbstractController {
+use LiteMVC\Resource;
+
+abstract class AbstractController extends Resource\AbstractResource {
     
 }

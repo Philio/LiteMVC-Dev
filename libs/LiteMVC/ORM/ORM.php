@@ -14,16 +14,17 @@
 
 namespace LiteMVC\ORM;
 
-class ORM {
+use LiteMVC\Resource;
+
+class ORM extends Resource\AbstractResource {
 
     /**
      * Column data types
      * 
      * @var int
      */
-
-    const COL_INTEGER = 0;
-    const COL_STRING = 1;
+    const COL_STRING = 0;
+    const COL_NUMERIC = 1;
 
     /**
      * Key types

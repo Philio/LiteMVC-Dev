@@ -2,7 +2,7 @@
 
 /**
  * LiteMVC Application Framework
- * 
+ *
  * Model exception
  *
  * @author Phil Bayfield
@@ -14,6 +14,7 @@
 
 namespace LiteMVC\Model;
 
-class Exception extends \Exception {
-    
+class Exception extends \Exception
+{
+
 }

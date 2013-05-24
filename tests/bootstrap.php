@@ -3,18 +3,14 @@
 /**
  * LiteMVC Application Framework
  *
- * Controller exception
+ * Test framework bootstrap
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
  * @license GNU General Public License version 3
- * @package LiteMVC
+ * @package tests
  * @version 0.4.0-dev
  */
 
-namespace LiteMVC\Controller;
-
-class Exception extends \Exception
-{
-
-}
+require_once 'libs/LiteMVC/Autoloader/Classmap.php';
+new LiteMVC\Autoloader\Classmap();

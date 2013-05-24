@@ -2,7 +2,7 @@
 
 /**
  * LiteMVC Application Framework
- * 
+ *
  * Abstract Controller
  *
  * @author Phil Bayfield
@@ -16,6 +16,7 @@ namespace LiteMVC\Controller;
 
 use LiteMVC\Resource;
 
-abstract class AbstractController extends Resource\AbstractResource {
-    
+abstract class AbstractController extends Resource\AbstractResource
+{
+
 }

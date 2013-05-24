@@ -2,7 +2,7 @@
 
 /**
  * LiteMVC Application Framework
- * 
+ *
  * MySQL driver for ORM
  *
  * @author Phil Bayfield
@@ -14,7 +14,8 @@
 
 namespace LiteMVC\ORM\Driver;
 
-abstract class AbstractDriver extends \PDO {
+abstract class AbstractDriver extends \PDO
+{
 
     /**
      * Configuration
@@ -27,10 +28,11 @@ abstract class AbstractDriver extends \PDO {
 
     /**
      * Set configuration and connect to the database
-     * 
+     *
      * @param array $config
      */
-    public function __construct(array $config) {
+    public function __construct(array $config)
+    {
         // Merge config into defaults
         $this->_config = array_merge($this->_config, $config);
 
@@ -40,36 +42,39 @@ abstract class AbstractDriver extends \PDO {
 
     /**
      * Get DSN for connecting to the database
-     * 
+     *
      * @return string
      */
     abstract protected function _getDSN();
 
     /**
      * Get database username
-     * 
+     *
      * @return string
      */
-    protected function _getUsername() {
+    protected function _getUsername()
+    {
         return null;
     }
 
     /**
      * Get database password
-     * 
+     *
      * @return string
      */
-    protected function _getPassword() {
+    protected function _getPassword()
+    {
         return null;
     }
 
     /**
      * Get a list of columns for a specfic table
-     * 
+     *
      * @param string $table
      * @return array
      */
-    public function getColumns($table) {
+    public function getColumns($table)
+    {
         // Get column data from the database
         $columns = $this->_getInfomationSchemaColumns($table);
         if (!$columns) {
@@ -90,11 +95,12 @@ abstract class AbstractDriver extends \PDO {
 
     /**
      * Query information schema in standards compliant way for column data
-     * 
+     *
      * @param string $table
      * @return \PDOStatement
      */
-    protected function _getInfomationSchemaColumns($table) {
+    protected function _getInfomationSchemaColumns($table)
+    {
         return parent::query(sprintf(
             "
             SELECT column_name, data_type, numeric_precision, is_nullable, column_default
@@ -107,7 +113,7 @@ abstract class AbstractDriver extends \PDO {
 
     /**
      * Map column type returned by the database to ORM constant
-     * 
+     *
      * @param string $type
      * @param int $precision
      * @return int
@@ -116,10 +122,11 @@ abstract class AbstractDriver extends \PDO {
 
     /**
      * Get a list of keys for a specific table
-     * 
+     *
      * @param string $table
      */
-    public function getKeys($table) {
+    public function getKeys($table)
+    {
         // Get column data from the database
         $keys = $this->_getInformationSchemaKeys($table);
 
@@ -140,11 +147,12 @@ abstract class AbstractDriver extends \PDO {
 
     /**
      * Query information schema in standards compliant way for key data
-     * 
+     *
      * @param string $table
      * @return \PDOStatement
      */
-    protected function _getInformationSchemaKeys($table) {
+    protected function _getInformationSchemaKeys($table)
+    {
         return parent::query(sprintf(
             "
 			SELECT t0.constraint_name, t1.column_name, t0.constraint_type
@@ -161,7 +169,7 @@ abstract class AbstractDriver extends \PDO {
 
     /**
      * Map key type returned by the database to ORM constant
-     * 
+     *
      * @param string $type
      * @return int
      */

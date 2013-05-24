@@ -2,7 +2,7 @@
 
 /**
  * LiteMVC Application Framework
- * 
+ *
  * CLI application module
  *
  * @author Phil Bayfield
@@ -14,21 +14,23 @@
 
 namespace LiteMVC\CLI\Module;
 
-class App extends AbstractModule {
-    
+class App extends AbstractModule
+{
+
     /**
      * Module name
-     * 
+     *
      * @var string
      */
     const NAME = 'app';
-    
+
     /**
      * Show help for the module
      */
-    public function showHelp() {
+    public function showHelp()
+    {
         $this->_cli->showHelpEntry(self::NAME, 'create', 'create a new application', array('<name>'));
         $this->_cli->showHelpEntry(self::NAME, 'rm', 'remove an existing application', array('<name>'));
     }
-    
+
 }

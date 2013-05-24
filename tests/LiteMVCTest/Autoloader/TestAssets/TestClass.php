@@ -3,18 +3,18 @@
 /**
  * LiteMVC Application Framework
  *
- * Controller exception
+ * Classmap autoload tests
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
  * @license GNU General Public License version 3
- * @package LiteMVC
+ * @package Autoloader
  * @version 0.4.0-dev
  */
 
-namespace LiteMVC\Controller;
+namespace LiteMVCTest\Autoloader\TestAssets;
 
-class Exception extends \Exception
+class TestClass
 {
 
 }

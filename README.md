@@ -1,13 +1,13 @@
-LiteMVC-Dev
+LiteMVC 0.4
 ===========
 
 About
 -----
 
 This is a development repository for LiteMVC. This is a new development version
-that will not be backwards compatible with the original. It will support PHP 5.4
-and the general approach and methodologies behind the project have changed
-somewhat.
+that will not be fully backwards compatible with the original LiteMVC. It will
+support PHP 5.3 or 5.4 and there are 3 simple goals to this release which are
+simplify, optimise and test.
 
 License
 -------

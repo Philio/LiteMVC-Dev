@@ -2,7 +2,7 @@
 
 /**
  * LiteMVC Application Framework
- * 
+ *
  * Abstract View
  *
  * @author Phil Bayfield
@@ -16,6 +16,7 @@ namespace LiteMVC\View;
 
 use LiteMVC\Resource;
 
-abstract class AbstractView extends Resource\AbstractDataset {
-    
+abstract class AbstractView extends Resource\AbstractDataset
+{
+
 }

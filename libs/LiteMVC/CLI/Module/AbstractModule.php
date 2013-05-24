@@ -2,7 +2,7 @@
 
 /**
  * LiteMVC Application Framework
- * 
+ *
  * CLI application module
  *
  * @author Phil Bayfield
@@ -16,34 +16,36 @@ namespace LiteMVC\CLI\Module;
 
 use LiteMVC\CLI\CLI;
 
-abstract class AbstractModule {
-    
+abstract class AbstractModule
+{
+
     /**
      * Module name
-     * 
+     *
      * @var string
      */
     const NAME = '';
-    
+
     /**
      * An instance of the CLI class
      *
      * @var CLI
      */
     protected $_cli;
-    
+
     /**
      * Set the CLI object
-     * 
+     *
      * @param CLI $cli
      */
-    public function __construct(CLI $cli) {
+    public function __construct(CLI $cli)
+    {
         $this->_cli = $cli;
     }
-    
+
     /**
      * Show help for the module
      */
     abstract public function showHelp();
-    
+
 }

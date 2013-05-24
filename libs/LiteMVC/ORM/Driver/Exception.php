@@ -2,7 +2,7 @@
 
 /**
  * LiteMVC Application Framework
- * 
+ *
  * ORM driver exception
  *
  * @author Phil Bayfield
@@ -14,6 +14,7 @@
 
 namespace LiteMVC\ORM\Driver;
 
-class Exception extends \Exception {
-    
+class Exception extends \Exception
+{
+
 }

@@ -2,7 +2,7 @@
 
 /**
  * LiteMVC Application Framework
- * 
+ *
  * Abstract Model
  *
  * @author Phil Bayfield
@@ -16,6 +16,7 @@ namespace LiteMVC\Model;
 
 use LiteMVC\Resource;
 
-abstract class AbstractModel extends Resource\AbstractDataset {
-    
+abstract class AbstractModel extends Resource\AbstractDataset
+{
+
 }

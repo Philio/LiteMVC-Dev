@@ -2,7 +2,7 @@
 
 /**
  * LiteMVC Application Framework
- * 
+ *
  * ORM
  *
  * @author Phil Bayfield
@@ -16,11 +16,12 @@ namespace LiteMVC\ORM;
 
 use LiteMVC\Resource;
 
-class ORM extends Resource\AbstractResource {
+class ORM extends Resource\AbstractResource
+{
 
     /**
      * Column data types
-     * 
+     *
      * @var int
      */
     const COL_STRING = 0;
@@ -28,7 +29,7 @@ class ORM extends Resource\AbstractResource {
 
     /**
      * Key types
-     * 
+     *
      * @var int
      */
     const KEY_PRIMARY = 0;

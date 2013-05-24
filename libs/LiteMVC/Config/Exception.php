@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * Controller exception
+ * Config exception
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,7 +12,7 @@
  * @version 0.4.0-dev
  */
 
-namespace LiteMVC\Controller;
+namespace LiteMVC\Config;
 
 class Exception extends \Exception
 {

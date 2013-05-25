@@ -9,6 +9,8 @@ that will not be fully backwards compatible with the original LiteMVC. It will
 support PHP 5.3 or 5.4 and there are 3 simple goals to this release which are
 simplify, optimise and test.
 
+[![Build Status](https://jenkins.codacity.co.uk/job/LiteMVC-Dev/badge/icon)](https://jenkins.codacity.co.uk/job/LiteMVC-Dev/)
+
 License
 -------
 

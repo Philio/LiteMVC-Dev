@@ -1,0 +1,6 @@
+<ruleset name="LiteMVC">
+    <description>Coding standards for LiteMVC</description>
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+    <rule ref="Generic.PHP.NoSilencedErrors"/>
+    <rule ref="Generic.PHP.UpperCaseConstant"/>
+</ruleset>

@@ -58,18 +58,11 @@ class Classmap extends Resource\AbstractResource
     );
 
     /**
-     * Map of classes to load
+     * The map of classes that this autoloader will load
      *
      * @var array
      */
     protected $_map = array();
-
-    /**
-     * A lowercase representation of the class map for faster loading
-     *
-     * @var array
-     */
-    protected $_lcMap = array();
 
     /**
      * Root path
@@ -87,13 +80,12 @@ class Classmap extends Resource\AbstractResource
     {
         parent::setConfig($config);
 
-        // Set class map and convert to lowercase
-        $this->_map = $this->_config[self::CONFIG_MAP];
-        foreach ($this->_map as $class => $path) {
-            $this->_lcMap[strtolower($class)] = $path;
+        // Set class map from config
+        foreach ($this->_config[self::CONFIG_MAP] as $class => $path) {
+            $this->_map[strtolower($class)] = $path;
         }
 
-        // Set root path
+        // Set root path from config
         $this->_root = realpath(__DIR__ . '/../../../' . $this->_config[self::CONFIG_RELATIVEPATH]);
 
         // Autoregister
@@ -135,8 +127,8 @@ class Classmap extends Resource\AbstractResource
      */
     public function load($class)
     {
-        if (isset($this->_lcMap[strtolower($class)])) {
-            require_once $this->_root . $this->_lcMap[strtolower($class)];
+        if (isset($this->_map[strtolower($class)])) {
+            require_once $this->_root . $this->_map[strtolower($class)];
         }
     }
 
@@ -147,10 +139,9 @@ class Classmap extends Resource\AbstractResource
      */
     public function addMap(array $map)
     {
-        // Add map entries to the lowercase map
-        array_walk($map, function ($value, $key) {
-            $this->_lcMap[strtolower($key)] = $value;
-        });
+        foreach ($map as $class => $path) {
+            $this->_map[strtolower($class)] = $path;
+        }
     }
 
     /**
@@ -161,7 +152,7 @@ class Classmap extends Resource\AbstractResource
      */
     public function addClass($class, $path)
     {
-        $this->_lcMap[strtolower($class)] = $path;
+        $this->_map[strtolower($class)] = $path;
     }
 
 }

@@ -22,9 +22,7 @@ abstract class AbstractDriver extends \PDO
      *
      * @var array
      */
-    protected $_config = array(
-        'host' => 'localhost'
-    );
+    protected $_config;
 
     /**
      * Set configuration and connect to the database
@@ -33,10 +31,7 @@ abstract class AbstractDriver extends \PDO
      */
     public function __construct(array $config)
     {
-        // Merge config into defaults
-        $this->_config = array_merge($this->_config, $config);
-
-        // Connect to the database
+        $this->_config = $config;
         parent::__construct($this->_getDSN(), $this->_getUsername(), $this->_getPassword());
     }
 

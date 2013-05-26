@@ -15,6 +15,7 @@
 namespace LiteMVC\Model;
 
 use LiteMVC\Resource;
+use LiteMVC\ORM\ORM;
 
 abstract class AbstractModel extends Resource\AbstractDataset
 {
@@ -32,6 +33,60 @@ abstract class AbstractModel extends Resource\AbstractDataset
      * @var string
      */
     protected $_table;
+
+    /**
+     * Schema, should be overriden by child
+     *
+     * An array based on the following format:
+     *
+     * array(
+     *     'field_name' => array(
+     *         'type' => ORM::COL_* constant,
+     *         'nullable' => boolean,
+     *         'default' => mixed
+     *     ),
+     *     ...
+     * )
+     *
+     * @var array
+     */
+    protected $_schema;
+
+    /**
+     * Primary key, should be overriden by child
+     *
+     * An array of field names defined in $_schema
+     *
+     * @var array
+     */
+    protected $_primaryKey;
+
+    /**
+     * Relationships, shoud be overriden by child or null if no relationships exist
+     *
+     * An array based on the following format:
+     *
+     * array(
+     *     'field_name' => array(
+     *         array(
+     *             'foreign_table_name' => string,
+     *             'foreign_field_name' => string,
+     *             'type' => ORM::REL_* constant
+     *         ),
+     *     ),
+     *     ...
+     * )
+     *
+     * @var array
+     */
+    protected $_relationships;
+
+    /**
+     * Original data from the database
+     *
+     * @var array
+     */
+    private $_originalData = array();
 
     /**
      * Get database name
@@ -59,6 +114,48 @@ abstract class AbstractModel extends Resource\AbstractDataset
             throw new Exception('Table name not set');
         }
         return $this->_table;
+    }
+
+    /**
+     * Get schema
+     *
+     * @return array
+     * @throws Exception
+     */
+    public function getSchema()
+    {
+        if ($this->_table === null) {
+            throw new Exception('Schema not set');
+        }
+        return $this->_schema;
+    }
+
+    /**
+     * Get primary key
+     *
+     * @return array
+     * @throws Exception
+     */
+    public function getPrimaryKey()
+    {
+        if ($this->_table === null) {
+            throw new Exception('Primary key not set');
+        }
+        return $this->_primaryKey;
+    }
+
+    /**
+     * Get relationships
+     *
+     * @return array
+     * @throws Exception
+     */
+    public function getRelationships()
+    {
+        if ($this->_relationships === null) {
+            throw new Exception('No relationships exist');
+        }
+        return $this->_relationships;
     }
 
 }

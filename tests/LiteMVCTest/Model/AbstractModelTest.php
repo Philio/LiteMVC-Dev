@@ -27,7 +27,7 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
     public function testGetDatabase()
     {
         $model = new TestModel();
-        $this->assertEquals($model->getDatabase(), 'a_database');
+        $this->assertEquals($model->getDatabase(), 'test');
     }
 
     /**
@@ -36,7 +36,36 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
     public function testGetTable()
     {
         $model = new TestModel();
-        $this->assertEquals($model->getTable(), 'a_table');
+        $this->assertEquals($model->getTable(), 'person');
+    }
+
+    /**
+     * Test AbstractModel::getSchema()
+     */
+    public function testGetSchema()
+    {
+        $model = new TestModel();
+        $this->assertArrayHasKey('person_id', $model->getSchema());
+        $this->assertArrayHasKey('name', $model->getSchema());
+        $this->assertArrayHasKey('age', $model->getSchema());
+    }
+
+    /**
+     * Test AbstractModel::getPrimaryKey()
+     */
+    public function testGetPrimaryKey()
+    {
+        $model = new TestModel();
+        $this->assertContains('person_id', $model->getPrimaryKey());
+    }
+
+    /**
+     * Test AbstractModel::getRelationships()
+     */
+    public function testGetRelationships()
+    {
+        $model = new TestModel();
+        $this->assertTrue(array_key_exists('person_id', $model->getRelationships()));
     }
 
     /**
@@ -46,7 +75,7 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('LiteMVC\Model\Exception');
         $model = $this->getMockForAbstractClass('LiteMVC\Model\AbstractModel');
-        $database = $model->getDatabase();
+        $model->getDatabase();
     }
 
     /**
@@ -56,7 +85,37 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('LiteMVC\Model\Exception');
         $model = $this->getMockForAbstractClass('LiteMVC\Model\AbstractModel');
-        $table = $model->getTable();
+        $model->getTable();
+    }
+
+    /**
+     * Test model without schema set
+     */
+    public function testBadSchema()
+    {
+        $this->setExpectedException('LiteMVC\Model\Exception');
+        $model = $this->getMockForAbstractClass('LiteMVC\Model\AbstractModel');
+        $model->getSchema();
+    }
+
+    /**
+     * Test model without primary key set
+     */
+    public function testBadPrimaryKey()
+    {
+        $this->setExpectedException('LiteMVC\Model\Exception');
+        $model = $this->getMockForAbstractClass('LiteMVC\Model\AbstractModel');
+        $model->getPrimaryKey();
+    }
+
+    /**
+     * Test model without relationships set
+     */
+    public function testBadRelationships()
+    {
+        $this->setExpectedException('LiteMVC\Model\Exception');
+        $model = $this->getMockForAbstractClass('LiteMVC\Model\AbstractModel');
+        $model->getRelationships();
     }
 
 }

@@ -35,4 +35,12 @@ class ORM extends Resource\AbstractResource
     const KEY_PRIMARY = 0;
     const KEY_FOREIGN = 1;
 
+    /**
+     * Table relationship types
+     *
+     * @var int
+     */
+    const REL_PARENT = 0;
+    const REL_CHILD = 1;
+
 }

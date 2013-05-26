@@ -62,4 +62,5 @@
     <rule ref="PEAR.Classes.ClassDeclaration"/>
     <rule ref="PEAR.Functions.FunctionDeclaration"/>
     <rule ref="PEAR.Functions.ValidDefaultValue"/>
+    <rule ref="Zend.NamingConventions.ValidVariableName"/>
 </ruleset>

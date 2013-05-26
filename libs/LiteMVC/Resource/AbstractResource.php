@@ -50,7 +50,8 @@ abstract class AbstractResource
      *
      * @param array $config
      */
-    public function setConfig(array $config) {
+    public function setConfig(array $config)
+    {
         $this->_config = array_merge($this->_configDefaults, $config);
     }
 
@@ -59,7 +60,8 @@ abstract class AbstractResource
      *
      * @return array
      */
-    public function getConfig() {
+    public function getConfig()
+    {
         return $this->_config;
     }
 

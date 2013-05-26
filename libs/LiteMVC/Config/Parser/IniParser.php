@@ -80,7 +80,8 @@ class IniParser implements ParserInterface
      *
      * @param array $data
      */
-    protected function _parseEnvironment($data) {
+    protected function _parseEnvironment($data)
+    {
         $config = array();
         foreach ($data as $key => $value) {
             $config = $this->_parseKey($config, $key, $value);

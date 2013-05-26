@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * CLI interpretor
+ * CLI interpreter
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013

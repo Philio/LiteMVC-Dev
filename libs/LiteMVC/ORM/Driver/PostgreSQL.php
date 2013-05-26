@@ -27,10 +27,18 @@ class PostgreSQL extends AbstractDriver
     protected function _getDSN()
     {
         $dsn = 'pgsql:host=' . $this->_config['host'];
-        $dsn .= isset($this->_config['port']) ? ';port=' . $this->_config['port'] : null;
-        $dsn .= isset($this->_config['dbname']) ? ';dbname=' . $this->_config['dbname'] : null;
-        $dsn .= isset($this->_config['username']) ? ';user=' . $this->_config['username'] : null;
-        $dsn .= isset($this->_config['password']) ? ';password=' . $this->_config['password'] : null;
+        if (isset($this->_config['port'])) {
+            $dsn .= ';port=' . $this->_config['port'];
+        }
+        if (isset($this->_config['dbname'])) {
+            $dsn .= ';dbname=' . $this->_config['dbname'];
+        }
+        if (isset($this->_config['username'])) {
+            $dsn .= ';user=' . $this->_config['username'];
+        }
+        if (isset($this->_config['password'])) {
+            $dsn .= ';password=' . $this->_config['password'];
+        }
         return $dsn;
     }
 

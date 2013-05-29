@@ -56,6 +56,9 @@ class App extends AbstractModule
 
         // Create directories
         $this->_createDirectoryStructure($name, $path);
+
+        // Copy files
+        $this->_copyFiles($name, $path);
     }
 
     /**
@@ -84,6 +87,8 @@ class App extends AbstractModule
         $this->_createDirectory($path . '/' . $name . '/src/View');
         $this->_createDirectory($path . '/' . $name . '/src/View/Layout');
         $this->_createDirectory($path . '/' . $name . '/src/View/Page');
+
+        echo PHP_EOL;
     }
 
     /**
@@ -95,6 +100,26 @@ class App extends AbstractModule
     {
         mkdir($path, $mode, $recursive);
         echo $this->_cli->colorise(realpath($path), CLI::COLOR_LIGHT_CYAN) . PHP_EOL;
+    }
+
+    /**
+     * Copy files into the application
+     *
+     * @param $name
+     * @param $path
+     */
+    private function _copyFiles($name, $path)
+    {
+        echo $this->_cli->colorise('Copying files...', CLI::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
+
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/AppAssets/skel', \FilesystemIterator::SKIP_DOTS));
+        foreach ($iterator as $filename => $fileInfo) {
+            $contents = file_get_contents($filename);
+            $contents = str_ireplace('{{ucfirst_name}}', ucfirst($name), $contents);
+            $newFile = str_ireplace(__DIR__ . '/AppAssets/skel', $path . '/' . $name, $filename);
+            file_put_contents($newFile, $contents);
+            echo $this->_cli->colorise(realpath($newFile), CLI::COLOR_LIGHT_CYAN) . PHP_EOL;
+        }
     }
 
 }

@@ -19,7 +19,8 @@ use LiteMVC\Resource;
 // Require base class as this may be the default autoloader
 require_once __DIR__ . '/../Resource/AbstractResource.php';
 
-abstract class AbstractAutoloader extends Resource\AbstractResource {
+abstract class AbstractAutoloader extends Resource\AbstractResource
+{
 
     // Configuration constants
     const CONFIG_AUTOREGISTER = "autoregister";

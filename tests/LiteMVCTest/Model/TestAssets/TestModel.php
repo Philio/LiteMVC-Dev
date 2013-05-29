@@ -72,8 +72,8 @@ class TestModel extends AbstractModel
     protected $_relationships = array(
         'person_id' => array(
             array(
-                'foreign_table_name' => 'address',
-                'foreign_field_name' => 'person_id',
+                'model' => 'Model\Address',
+                'field' => 'person_id',
                 'type' => ORM::REL_PARENT
             )
         )

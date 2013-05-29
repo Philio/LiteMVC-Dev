@@ -14,6 +14,8 @@
 
 namespace LiteMVC\CLI;
 
+use LiteMVC\CLI\Module;
+
 class CLI
 {
 
@@ -58,6 +60,13 @@ class CLI
     const CMD = 'LiteMVC';
 
     /**
+     * Indent for command description
+     *
+     * @var int
+     */
+    const DESC_INDENT = 40;
+
+    /**
      * Run CLI
      *
      * @param array $argv
@@ -74,7 +83,11 @@ class CLI
 
             // Load the module's action
             if (isset($argv[2]) && method_exists($module, $argv[2])) {
-                echo $module->$argv[2](array_slice($argv, 2));
+                try {
+                    echo $module->$argv[2](array_slice($argv, 3));
+                } catch (Module\Exception $e) {
+                    $this->_showHelp(strtolower($argv[1]), $e->getMessage());
+                }
             } else {
                 $this->_showHelp(strtolower($argv[1]));
             }
@@ -109,12 +122,12 @@ class CLI
         $req = array_merge(array(self::CMD, $moduleName, $actionName), $reqParams);
 
         // Show required params in green
-        $reqFmt = count($optParams) ? '%s' : '%-30s';
+        $reqFmt = count($optParams) ? '%s' : '%-' . self::DESC_INDENT . 's';
         echo $this->colorise(sprintf($reqFmt, implode(' ', $req)), self::COLOR_LIGHT_GREEN);
 
         // Show optional params in cyan
         if (count($optParams)) {
-            $optFmt = strlen(implode(' ', $req) . ' ') < 30 ? '%-' . (30 - strlen(implode(' ', $req) . ' ')) . 's' : '%s';
+            $optFmt = strlen(implode(' ', $req) . ' ') < self::DESC_INDENT ? '%-' . (self::DESC_INDENT - strlen(implode(' ', $req) . ' ')) . 's' : '%s';
             echo ' ' . $this->colorise(sprintf($optFmt, implode(' ', $optParams)), self::COLOR_LIGHT_CYAN);
         }
 
@@ -145,8 +158,13 @@ class CLI
      *
      * @param string $moduleName
      */
-    private function _showHelp($moduleName = null)
+    private function _showHelp($moduleName = null, $error = null)
     {
+        // Show error
+        if ($error !== null) {
+            echo $this->colorise("Error: " . $error, self::COLOR_LIGHT_RED) . PHP_EOL . PHP_EOL;
+        }
+
         // Show usage
         echo $this->colorise('Usage:', self::COLOR_YELLOW) . PHP_EOL . PHP_EOL;
         $this->showHelpEntry('<module name>', '<action name>', null, array('[required params]'), array('[optional params]'));

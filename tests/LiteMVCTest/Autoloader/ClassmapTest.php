@@ -25,7 +25,7 @@ class ClassmapTest extends \PHPUnit_Framework_TestCase
     {
         // Remove any LiteMVC autoloaders
         foreach (spl_autoload_functions() as $function) {
-            if (is_array($function) && $function[0] instanceof \LiteMVC\Autoloader\Classmap) {
+            if (is_array($function) && ($function[0] instanceof Autoloader\Classmap || $function[0] instanceof Autoloader\Universal)) {
                 $this->_currentAutoloaders[] = $function;
                 spl_autoload_unregister($function);
             }
@@ -90,10 +90,10 @@ class ClassmapTest extends \PHPUnit_Framework_TestCase
     public function testLoad()
     {
         $classmap = new Autoloader\Classmap(array(
-            Autoloader\Classmap::CONFIG_MAP => array('LiteMVCTest\Autoloader\TestAssets\TestClass' => '/LiteMVCTest/Autoloader/TestAssets/TestClass.php'),
+            Autoloader\Classmap::CONFIG_MAP => array('LiteMVCTest\Autoloader\TestAssets\TestClassClassmap' => '/LiteMVCTest/Autoloader/TestAssets/TestClassClassmap.php'),
             Autoloader\Classmap::CONFIG_RELATIVEPATH => 'tests/'
         ));
-        $this->assertInstanceOf('LiteMVCTest\Autoloader\TestAssets\TestClass', new \LiteMVCTest\Autoloader\TestAssets\TestClass());
+        $this->assertInstanceOf('LiteMVCTest\Autoloader\TestAssets\TestClassClassmap', new \LiteMVCTest\Autoloader\TestAssets\TestClassClassmap());
     }
 
     /**
@@ -105,8 +105,8 @@ class ClassmapTest extends \PHPUnit_Framework_TestCase
             Autoloader\Classmap::CONFIG_MAP => array(),
             Autoloader\Classmap::CONFIG_RELATIVEPATH => 'tests/'
         ));
-        $classmap->addMap(array('LiteMVCTest\Autoloader\TestAssets\TestClass' => '/LiteMVCTest/Autoloader/TestAssets/TestClass.php'));
-        $this->assertInstanceOf('LiteMVCTest\Autoloader\TestAssets\TestClass', new \LiteMVCTest\Autoloader\TestAssets\TestClass());
+        $classmap->addMap(array('LiteMVCTest\Autoloader\TestAssets\TestClassClassmap2' => '/LiteMVCTest/Autoloader/TestAssets/TestClassClassmap2.php'));
+        $this->assertInstanceOf('LiteMVCTest\Autoloader\TestAssets\TestClassClassmap2', new \LiteMVCTest\Autoloader\TestAssets\TestClassClassmap2());
     }
 
     /**
@@ -118,8 +118,8 @@ class ClassmapTest extends \PHPUnit_Framework_TestCase
             Autoloader\Classmap::CONFIG_MAP => array(),
             Autoloader\Classmap::CONFIG_RELATIVEPATH => 'tests/'
         ));
-        $classmap->addClass('LiteMVCTest\Autoloader\TestAssets\TestClass', '/LiteMVCTest/Autoloader/TestAssets/TestClass.php');
-        $this->assertInstanceOf('LiteMVCTest\Autoloader\TestAssets\TestClass', new \LiteMVCTest\Autoloader\TestAssets\TestClass());
+        $classmap->addClass('LiteMVCTest\Autoloader\TestAssets\TestClassClassmap3', '/LiteMVCTest/Autoloader/TestAssets/TestClassClassmap3.php');
+        $this->assertInstanceOf('LiteMVCTest\Autoloader\TestAssets\TestClassClassmap3', new \LiteMVCTest\Autoloader\TestAssets\TestClassClassmap3());
     }
 
     /**

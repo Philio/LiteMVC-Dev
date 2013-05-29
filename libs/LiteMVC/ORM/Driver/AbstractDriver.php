@@ -62,6 +62,26 @@ abstract class AbstractDriver extends \PDO
         return null;
     }
 
+    public function getTables($database)
+    {
+
+    }
+
+    /**
+     * Query information schema in standards compliant way for list of tables in a database
+     *
+     * @param $database
+     * @return \PDOStatement
+     */
+    protected function _getInformationSchemaTables($database)
+    {
+        return parent::query(sprintf(
+            "
+            ",
+            $database
+        ), \PDO::FETCH_ASSOC);
+    }
+
     /**
      * Get a list of columns for a specfic table
      *
@@ -99,7 +119,7 @@ abstract class AbstractDriver extends \PDO
         return parent::query(sprintf(
             "
             SELECT column_name, data_type, numeric_precision, is_nullable, column_default
-            FROM INFORMATION_SCHEMA.COLUMNS
+            FROM information_schema.columns
             WHERE table_name = '%s'
 			",
             $table
@@ -133,8 +153,13 @@ abstract class AbstractDriver extends \PDO
                 continue;
             }
             $formatted[$key['constraint_name']] = array(
+                'database' => $key['table_schema'],
+                'table' => $key['table_name'],
                 'column' => $key['column_name'],
-                'type' => $type
+                'type' => $type,
+                'foreign_database' => $key['referenced_table_schema'],
+                'foreign_table' => $key['referenced_table_name'],
+                'foreign_column' => $key['referenced_column_name'],
             );
         }
         return $formatted;
@@ -150,13 +175,13 @@ abstract class AbstractDriver extends \PDO
     {
         return parent::query(sprintf(
             "
-			SELECT t0.constraint_name, t1.column_name, t0.constraint_type
-			FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS t0
-			LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE t1
-			ON t0.constraint_catalog = t1.constraint_catalog
-			AND t0.constraint_schema = t1.constraint_schema
-			AND t0.constraint_name = t1.constraint_name
-			WHERE t0.table_name = '%s'
+            SELECT t0.table_schema, t0.table_name, t0.constraint_name, t0.constraint_type, t1.column_name, t1.referenced_table_schema, t1.referenced_table_name, t1.referenced_column_name
+            FROM information_schema.table_constraints t0
+            JOIN information_schema.key_column_usage t1
+            ON t0.table_schema = t1.table_schema
+            AND t0.table_name = t1.table_name
+            AND t0.constraint_name = t1.constraint_name
+            WHERE t0.table_name = '%s'
 			",
             $table
         ), \PDO::FETCH_ASSOC);

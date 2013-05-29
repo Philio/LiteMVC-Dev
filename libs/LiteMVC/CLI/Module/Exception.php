@@ -3,18 +3,18 @@
 /**
  * LiteMVC Application Framework
  *
- * Classmap autoload tests
+ * CLI module exception
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
  * @license GNU General Public License version 3
- * @package Autoloader
+ * @package LiteMVC
  * @version 0.4.0-dev
  */
 
-namespace LiteMVCTest\Autoloader\TestAssets;
+namespace LiteMVC\CLI\Module;
 
-class TestClass
+class Exception extends \Exception
 {
 
 }

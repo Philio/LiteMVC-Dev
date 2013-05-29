@@ -62,15 +62,15 @@ abstract class AbstractModel extends Resource\AbstractDataset
     protected $_primaryKey;
 
     /**
-     * Relationships, shoud be overriden by child or null if no relationships exist
+     * Relationships, should be overriden by child or null if no relationships exist
      *
      * An array based on the following format:
      *
      * array(
      *     'field_name' => array(
      *         array(
-     *             'foreign_table_name' => string,
-     *             'foreign_field_name' => string,
+     *             'model' => string,
+     *             'field' => string,
      *             'type' => ORM::REL_* constant
      *         ),
      *     ),

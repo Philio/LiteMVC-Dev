@@ -14,25 +14,34 @@
 
 namespace LiteMVC\Autoloader;
 
-use LiteMVC\Resource;
-
 // Require base class as this may be the default autoloader
-require_once __DIR__ . '/../Resource/AbstractResource.php';
+require_once 'AbstractAutoloader.php';
 
-class Classmap extends Resource\AbstractResource
+class Classmap extends AbstractAutoloader
 {
 
-    // Configuration constants
-    const CONFIG_MAP = "map";
-    const CONFIG_RELATIVEPATH = "relativepath";
-    const CONFIG_AUTOREGISTER = "autoregister";
+    /**
+     * Configuration constants
+     *
+     * @var string
+     */
+    const CONFIG_MAP = 'map';
+    const CONFIG_RELATIVEPATH = 'relativepath';
 
-    // Default configuation
+    /**
+     * Default configuration
+     *
+     * @var array
+     */
     protected $_configDefaults = array(
         self::CONFIG_MAP => array(
+            'LiteMVC\Autoloader\AbstractAutoloader' => '/Autoloader/AbstractAutoloader.php',
+            'LiteMVC\Autoloader\Classmap' => '/Autoloader/Classmap.php',
+            'LiteMVC\Autoloader\Universal' => '/Autoloader/Universal.php',
             'LiteMVC\CLI\CLI' => '/CLI/CLI.php',
             'LiteMVC\CLI\Module\AbstractModule' => '/CLI/Module/AbstractModule.php',
             'LiteMVC\CLI\Module\App' => '/CLI/Module/App.php',
+            'LiteMVC\CLI\Module\Exception' => '/CLI/Module/Exception.php',
             'LiteMVC\CLI\Module\Info' => '/CLI/Module/Info.php',
             'LiteMVC\Config\Config' => '/Config/Config.php',
             'LiteMVC\Config\Exception' => '/Config/Exception.php',
@@ -87,37 +96,6 @@ class Classmap extends Resource\AbstractResource
 
         // Set root path from config
         $this->_root = realpath(__DIR__ . '/../../../' . $this->_config[self::CONFIG_RELATIVEPATH]);
-
-        // Autoregister
-        if ($this->_config[self::CONFIG_AUTOREGISTER]) {
-            $this->register();
-        }
-    }
-
-    /**
-     * Check if this autoloader is registered
-     *
-     * @return bool
-     */
-    public function isRegistered()
-    {
-        return in_array(array($this, 'load'), spl_autoload_functions(), true);
-    }
-
-    /**
-     * Register the autoloader
-     */
-    public function register()
-    {
-        spl_autoload_register(array($this, 'load'));
-    }
-
-    /**
-     * Unregister the autoloader
-     */
-    public function unregister()
-    {
-        spl_autoload_unregister(array($this, 'load'));
     }
 
     /**

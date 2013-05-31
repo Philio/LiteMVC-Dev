@@ -112,14 +112,33 @@ class App extends AbstractModule
     {
         echo $this->_cli->colorise('Copying files...', CLI::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
 
+        // Iterate skeleton directory and copy any files
         $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/AppAssets/skel', \FilesystemIterator::SKIP_DOTS));
+        $templateVars = $this->_createTemplateVars($name);
         foreach ($iterator as $filename => $fileInfo) {
+            // Get file and replace template vars
             $contents = file_get_contents($filename);
-            $contents = str_ireplace('{{ucfirst_name}}', ucfirst($name), $contents);
+            foreach ($templateVars as $search => $replace) {
+                $contents = str_ireplace($search, $replace, $contents);
+            }
             $newFile = str_ireplace(__DIR__ . '/AppAssets/skel', $path . '/' . $name, $filename);
             file_put_contents($newFile, $contents);
             echo $this->_cli->colorise(realpath($newFile), CLI::COLOR_LIGHT_CYAN) . PHP_EOL;
         }
+    }
+
+    /**
+     * Generate template replacements for copied default files
+     *
+     * @param $name
+     * @return array
+     */
+    private function _createTemplateVars($name)
+    {
+        return array(
+            '{{lowercase_name}}' => strtolower($name),
+            '{{ucfirst_name}}' => ucfirst($name)
+        );
     }
 
 }

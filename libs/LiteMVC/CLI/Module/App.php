@@ -139,7 +139,7 @@ class App extends AbstractModule
             foreach ($templateVars as $search => $replace) {
                 $contents = str_ireplace($search, $replace, $contents);
             }
-            $newFile = str_ireplace(__DIR__ . '/AppAssets/skel', $path . '/' . $name, $filename);
+            $newFile = str_ireplace(__DIR__ . '/AppAssets/skel', $path . '/' . $name, str_replace('.template', '', $filename));
             file_put_contents($newFile, $contents);
             echo $this->_cli->colorise(realpath($newFile), CLI::COLOR_LIGHT_CYAN) . PHP_EOL;
         }

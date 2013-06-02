@@ -87,7 +87,7 @@ class CLI
                 try {
                     echo $module->$argv[2](array_slice($argv, 3));
                 } catch (Module\Exception $e) {
-                    $this->_showHelp(strtolower($argv[1]));
+                    $this->_showHelp(strtolower($argv[1]), $e->getMessage());
                 }
             } else {
                 $this->_showHelp(strtolower($argv[1]));

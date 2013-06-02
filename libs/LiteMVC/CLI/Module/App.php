@@ -61,6 +61,24 @@ class App extends AbstractModule
         $this->_copyFiles($name, $path);
     }
 
+    public function rm($params)
+    {
+        // Check that at least 1 parameter was given
+        if (count($params) == 0) {
+            throw new Exception('Required parameter name missing');
+        }
+        $name = $params[0];
+        $path = isset($params[1]) ? $params[1] : 'apps';
+
+        // Check that the app exists
+        if (!file_exists($path . '/' . $name) || !is_dir($path . '/' . $name)) {
+            throw new Exception('No app of that name exists');
+        }
+
+        // Delete the app
+        $this->_removeAll($path . '/' . $name);
+    }
+
     /**
      * Create directories for an application
      *
@@ -137,8 +155,34 @@ class App extends AbstractModule
     {
         return array(
             '{{lowercase_name}}' => strtolower($name),
-            '{{ucfirst_name}}' => ucfirst($name)
+            '{{ucfirst_name}}' => ucfirst($name),
+            '{{date_year}}' => date('Y')
         );
+    }
+
+    /**
+     * Remove all contents of a directory
+     *
+     * @param $dir
+     */
+    private function _removeAll($dir)
+    {
+        echo $this->_cli->colorise('Removing files...', CLI::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
+
+        // Iterate director and remove contents
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($iterator as $filename => $fileInfo) {
+            echo $this->_cli->colorise($fileInfo->getRealPath(), CLI::COLOR_LIGHT_CYAN) . PHP_EOL;
+            if ($fileInfo->isDir()) {
+                rmdir($filename);
+            } else {
+                unlink($filename);
+            }
+        }
+
+        // Remove root directory
+        echo $this->_cli->colorise(realpath($dir), CLI::COLOR_LIGHT_CYAN) . PHP_EOL;
+        rmdir($dir);
     }
 
 }

@@ -67,7 +67,7 @@ class Universal extends AbstractAutoloader
         // Match namespaces
         foreach ($this->_namespaces as $namespace => $path) {
             if (stripos($class, $namespace) === 0) {
-                require_once $path . '/' . str_replace('\\', '/', $class) . '.php';
+                require_once str_replace('\\', '/', str_ireplace($namespace, $path, $class)) . '.php';
                 break;
             }
         }

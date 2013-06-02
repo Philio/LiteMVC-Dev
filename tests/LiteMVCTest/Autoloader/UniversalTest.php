@@ -85,7 +85,7 @@ class UniversalTest extends \PHPUnit_Framework_TestCase
     {
         $universal = new Autoloader\Universal(array(
             Autoloader\Universal::CONFIG_NAMESPACE_MAP => array(
-                'LiteMVCTest\Autoloader\TestAssets' => realpath(__DIR__ . '/../../')
+                'LiteMVCTest\Autoloader\TestAssets' => realpath(__DIR__ . '/TestAssets')
             )
         ));
         $this->assertInstanceOf('LiteMVCTest\Autoloader\TestAssets\TestClassUniversal', new \LiteMVCTest\Autoloader\TestAssets\TestClassUniversal());
@@ -97,7 +97,7 @@ class UniversalTest extends \PHPUnit_Framework_TestCase
     public function testAddNamespace()
     {
         $universal = new Autoloader\Universal();
-        $universal->addNamespace('LiteMVCTest\Autoloader\TestAssets', realpath(__DIR__ . '/../../'));
+        $universal->addNamespace('LiteMVCTest\Autoloader\TestAssets', realpath(__DIR__ . '/TestAssets'));
         $this->assertInstanceOf('LiteMVCTest\Autoloader\TestAssets\TestClassUniversal2', new \LiteMVCTest\Autoloader\TestAssets\TestClassUniversal2());
     }
 

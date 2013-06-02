@@ -27,6 +27,7 @@ class CLI
     private $_modules = array(
         'info',
         'app',
+        'orm'
     );
 
     /**
@@ -64,7 +65,7 @@ class CLI
      *
      * @var int
      */
-    const DESC_INDENT = 40;
+    const DESC_INDENT = 50;
 
     /**
      * Run CLI
@@ -86,7 +87,7 @@ class CLI
                 try {
                     echo $module->$argv[2](array_slice($argv, 3));
                 } catch (Module\Exception $e) {
-                    $this->_showHelp(strtolower($argv[1]), $e->getMessage());
+                    $this->_showHelp(strtolower($argv[1]));
                 }
             } else {
                 $this->_showHelp(strtolower($argv[1]));

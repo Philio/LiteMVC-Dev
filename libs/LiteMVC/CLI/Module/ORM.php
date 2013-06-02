@@ -15,6 +15,7 @@
 namespace LiteMVC\CLI\Module;
 
 use LiteMVC\CLI\CLI;
+use LiteMVC\CLI\Utils;
 
 class ORM extends AbstractModule
 {
@@ -31,7 +32,7 @@ class ORM extends AbstractModule
      */
     public function showHelp()
     {
-        $this->_cli->showHelpEntry(self::NAME, 'gen', 'generate models from database', array('<app>', '<config>'), array('<db>', '<tables>'));
+        Utils::showHelpEntry(self::NAME, 'gen', 'generate models from database', array('<app>', '<config>'), array('<db>', '<tables>'));
     }
 
 }

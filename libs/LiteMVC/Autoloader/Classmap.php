@@ -44,6 +44,7 @@ class Classmap extends AbstractAutoloader
             'LiteMVC\CLI\Module\Exception' => '/CLI/Module/Exception.php',
             'LiteMVC\CLI\Module\Info' => '/CLI/Module/Info.php',
             'LiteMVC\CLI\Module\ORM' => '/CLI/Module/ORM.php',
+            'LiteMVC\CLI\Utils' => '/CLI/Utils.php',
             'LiteMVC\Config\Config' => '/Config/Config.php',
             'LiteMVC\Config\Exception' => '/Config/Exception.php',
             'LiteMVC\Config\Parser\IniParser' => '/Config/Parser/IniParser.php',

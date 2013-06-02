@@ -15,6 +15,7 @@
 namespace LiteMVC\CLI\Module;
 
 use LiteMVC\CLI\CLI;
+use LiteMVC\CLI\Utils;
 
 class App extends AbstractModule
 {
@@ -31,8 +32,8 @@ class App extends AbstractModule
      */
     public function showHelp()
     {
-        $this->_cli->showHelpEntry(self::NAME, 'create', 'create a new application', array('<name>'), array('<path>'));
-        $this->_cli->showHelpEntry(self::NAME, 'rm', 'remove an existing application', array('<name>'), array('<path>'));
+        Utils::showHelpEntry(self::NAME, 'create', 'create a new application', array('<name>'), array('<path>'));
+        Utils::showHelpEntry(self::NAME, 'rm', 'remove an existing application', array('<name>'), array('<path>'));
     }
 
     /**
@@ -59,6 +60,8 @@ class App extends AbstractModule
 
         // Copy files
         $this->_copyFiles($name, $path);
+
+        echo PHP_EOL . Utils::colorise('App created successfully', Utils::COLOR_LIGHT_GREEN) . PHP_EOL;
     }
 
     public function rm($params)
@@ -77,6 +80,8 @@ class App extends AbstractModule
 
         // Delete the app
         $this->_removeAll($path . '/' . $name);
+
+        echo PHP_EOL . Utils::colorise('App removed successfully', Utils::COLOR_LIGHT_GREEN) . PHP_EOL;
     }
 
     /**
@@ -87,7 +92,7 @@ class App extends AbstractModule
      */
     private function _createDirectoryStructure($name, $path)
     {
-        echo $this->_cli->colorise('Creating directory structure...', CLI::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
+        echo Utils::colorise('Creating directory structure...', Utils::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
 
         // Create path, if it doesn't exist
         if (!file_exists($path)) {
@@ -117,7 +122,7 @@ class App extends AbstractModule
     private function _createDirectory($path, $mode = 0755, $recursive = false)
     {
         mkdir($path, $mode, $recursive);
-        echo $this->_cli->colorise(realpath($path), CLI::COLOR_LIGHT_CYAN) . PHP_EOL;
+        echo Utils::colorise(realpath($path), Utils::COLOR_LIGHT_CYAN) . PHP_EOL;
     }
 
     /**
@@ -128,7 +133,7 @@ class App extends AbstractModule
      */
     private function _copyFiles($name, $path)
     {
-        echo $this->_cli->colorise('Copying files...', CLI::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
+        echo Utils::colorise('Copying files...', Utils::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
 
         // Iterate skeleton directory and copy any files
         $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/AppAssets/skel', \FilesystemIterator::SKIP_DOTS));
@@ -141,7 +146,7 @@ class App extends AbstractModule
             }
             $newFile = str_ireplace(__DIR__ . '/AppAssets/skel', $path . '/' . $name, str_replace('.template', '', $filename));
             file_put_contents($newFile, $contents);
-            echo $this->_cli->colorise(realpath($newFile), CLI::COLOR_LIGHT_CYAN) . PHP_EOL;
+            echo Utils::colorise(realpath($newFile), Utils::COLOR_LIGHT_CYAN) . PHP_EOL;
         }
     }
 
@@ -167,12 +172,12 @@ class App extends AbstractModule
      */
     private function _removeAll($dir)
     {
-        echo $this->_cli->colorise('Removing files...', CLI::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
+        echo Utils::colorise('Removing files...', Utils::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
 
         // Iterate director and remove contents
         $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($iterator as $filename => $fileInfo) {
-            echo $this->_cli->colorise($fileInfo->getRealPath(), CLI::COLOR_LIGHT_CYAN) . PHP_EOL;
+            echo Utils::colorise($fileInfo->getRealPath(), Utils::COLOR_LIGHT_CYAN) . PHP_EOL;
             if ($fileInfo->isDir()) {
                 rmdir($filename);
             } else {
@@ -181,7 +186,7 @@ class App extends AbstractModule
         }
 
         // Remove root directory
-        echo $this->_cli->colorise(realpath($dir), CLI::COLOR_LIGHT_CYAN) . PHP_EOL;
+        echo Utils::colorise(realpath($dir), Utils::COLOR_LIGHT_CYAN) . PHP_EOL;
         rmdir($dir);
     }
 

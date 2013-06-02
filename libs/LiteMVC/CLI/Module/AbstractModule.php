@@ -27,23 +27,6 @@ abstract class AbstractModule
     const NAME = '';
 
     /**
-     * An instance of the CLI class
-     *
-     * @var CLI
-     */
-    protected $_cli;
-
-    /**
-     * Set the CLI object
-     *
-     * @param CLI $cli
-     */
-    public function __construct(CLI $cli)
-    {
-        $this->_cli = $cli;
-    }
-
-    /**
      * Show help for the module
      */
     abstract public function showHelp();

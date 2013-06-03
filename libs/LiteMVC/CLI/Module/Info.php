@@ -9,7 +9,7 @@
  * @copyright 2010 - 2013
  * @license GNU General Public License version 3
  * @package LiteMVC
- * @version 0.4.0-dev
+ * @version 0.4.0
  */
 
 namespace LiteMVC\CLI\Module;
@@ -57,7 +57,7 @@ class Info extends AbstractModule
      */
     public function version()
     {
-        echo Utils::colorise('Version 0.4.0-dev', Utils::COLOR_LIGHT_GREY) . PHP_EOL;
+        echo Utils::colorise('Version 0.4.0', Utils::COLOR_LIGHT_GREY) . PHP_EOL;
     }
 
     /**

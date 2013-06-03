@@ -48,7 +48,16 @@ class AppTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test CLI app create
+     * Test App::showHelp()
+     */
+    public function testShowHelp()
+    {
+        $this->expectOutputRegex('/app(.*)create(.*)create a new application(.*)app(.*)rm(.*)remove an existing application/sm');
+        $this->_app->showHelp();
+    }
+
+    /**
+     * Test App::create()
      */
     public function testAppCreate()
     {
@@ -72,19 +81,38 @@ class AppTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test CLI app create fails when app exists
+     * Test App::create() fails when app exists
      */
     public function testAppCreateDuplicate()
     {
         $this->setExpectedException('LiteMVC\CLI\Module\Exception');
-        ob_start();
+        ob_start(); // Buffer the output, screws up PHPunit
         $this->_app->create(array('test', __DIR__ . '/TestWorkspace'));
-        ob_end_clean();
+        ob_end_clean(); // Discard the output buffer
         $this->_app->create(array('test', __DIR__ . '/TestWorkspace'));
     }
 
     /**
-     * Test CLI app remove
+     * Test App::create() fails when params are invalid
+     */
+    public function testAppCreateInvalidParams()
+    {
+        $this->setExpectedException('LiteMVC\CLI\Module\Exception');
+        $this->_app->create(array());
+    }
+
+    /**
+     * Test App::create() creates path when it doesn't exist
+     */
+    public function testAppCreateNonExistantPath()
+    {
+        $this->expectOutputRegex('/App created successfully/');
+        $this->_app->create(array('test', __DIR__ . '/TestWorkspace/newpath'));
+        $this->assertTrue(file_exists(__DIR__ . '/TestWorkspace/newpath/test'));
+    }
+
+    /**
+     * Test App::rm()
      */
     public function testAppRemove()
     {
@@ -95,12 +123,21 @@ class AppTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test CLI app remove when app doesn't exist
+     * Test App::rm() fails when app doesn't exist
      */
     public function testAppRemoveNonExistant()
     {
         $this->setExpectedException('LiteMVC\CLI\Module\Exception');
         $this->_app->rm(array('test', __DIR__ . '/TestWorkspace'));
+    }
+
+    /**
+     * Test App::rm() fails when params are invalid
+     */
+    public function testAppRemoveInvalidParams()
+    {
+        $this->setExpectedException('LiteMVC\CLI\Module\Exception');
+        $this->_app->rm(array());
     }
 
 }

@@ -48,7 +48,7 @@ class CLI
             // Load the module's action
             if (isset($argv[2]) && method_exists($module, $argv[2])) {
                 try {
-                    echo $module->$argv[2](array_slice($argv, 3));
+                    $module->$argv[2](array_slice($argv, 3));
                 } catch (Module\Exception $e) {
                     $this->_showHelp(strtolower($argv[1]), $e->getMessage());
                 }

@@ -45,7 +45,9 @@ class Info extends AbstractModule
      */
     public function all()
     {
-        return $this->version() . $this->copyright() . $this->license();
+        $this->version();
+        $this->copyright();
+        $this->license();
     }
 
     /**
@@ -55,7 +57,7 @@ class Info extends AbstractModule
      */
     public function version()
     {
-        return Utils::colorise('Version 0.4.0-dev' . PHP_EOL, Utils::COLOR_LIGHT_GREY);
+        echo Utils::colorise('Version 0.4.0-dev', Utils::COLOR_LIGHT_GREY) . PHP_EOL;
     }
 
     /**
@@ -65,7 +67,7 @@ class Info extends AbstractModule
      */
     public function copyright()
     {
-        return Utils::colorise('Copyright (c) 2010 - ' . date('Y') . ' Phil Bayfield' . PHP_EOL, Utils::COLOR_LIGHT_GREY);
+        echo Utils::colorise('Copyright (c) 2010 - ' . date('Y') . ' Phil Bayfield', Utils::COLOR_LIGHT_GREY) . PHP_EOL;
     }
 
     /**
@@ -75,7 +77,7 @@ class Info extends AbstractModule
      */
     public function license()
     {
-        return Utils::colorise('GNU General Public License version 3' . PHP_EOL, Utils::COLOR_LIGHT_GREY);
+        echo Utils::colorise('GNU General Public License version 3', Utils::COLOR_LIGHT_GREY) . PHP_EOL;
     }
 
 }

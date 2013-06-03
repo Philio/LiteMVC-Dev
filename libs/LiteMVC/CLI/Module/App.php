@@ -41,7 +41,7 @@ class App extends AbstractModule
      *
      * @param $params
      */
-    public function create($params)
+    public function create(array $params)
     {
         // Check that at least 1 parameter was given
         if (count($params) == 0) {
@@ -64,7 +64,7 @@ class App extends AbstractModule
         echo PHP_EOL . Utils::colorise('App created successfully', Utils::COLOR_LIGHT_GREEN) . PHP_EOL;
     }
 
-    public function rm($params)
+    public function rm(array $params)
     {
         // Check that at least 1 parameter was given
         if (count($params) == 0) {

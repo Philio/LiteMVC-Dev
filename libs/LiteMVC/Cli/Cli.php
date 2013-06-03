@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * CLI interpreter
+ * Cli interpreter
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,11 +12,11 @@
  * @version 0.4.0
  */
 
-namespace LiteMVC\CLI;
+namespace LiteMVC\Cli;
 
-use LiteMVC\CLI\Module;
+use LiteMVC\Cli\Module;
 
-class CLI
+class Cli
 {
 
     /**
@@ -31,7 +31,7 @@ class CLI
     );
 
     /**
-     * Run CLI
+     * Run Cli
      *
      * @param array $argv
      */
@@ -42,7 +42,7 @@ class CLI
 
         // Load the specified module
         if (isset($argv[1]) && in_array(strtolower($argv[1]), $this->_modules)) {
-            $className = 'LiteMVC\CLI\Module\\' . $argv[1];
+            $className = 'LiteMVC\Cli\Module\\' . $argv[1];
             $module = new $className();
 
             // Load the module's action
@@ -79,12 +79,12 @@ class CLI
         // Show commands
         echo Utils::colorise('Commands' . ($moduleName ? ' for ' . $moduleName : null) . ':', Utils::COLOR_YELLOW) . PHP_EOL . PHP_EOL;
         if ($moduleName) {
-            $className = 'LiteMVC\CLI\Module\\' . $moduleName;
+            $className = 'LiteMVC\Cli\Module\\' . $moduleName;
             $module = new $className();
             $module->showHelp();
         } else {
             foreach ($this->_modules as $className) {
-                $className = 'LiteMVC\CLI\Module\\' . $className;
+                $className = 'LiteMVC\Cli\Module\\' . $className;
                 $module = new $className();
                 $module->showHelp();
             }

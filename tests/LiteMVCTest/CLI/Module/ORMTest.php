@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * CLI ORM module tests
+ * Cli Orm module tests
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,27 +12,27 @@
  * @version 0.4.0
  */
 
-namespace LiteMVCTest\CLI\Module;
+namespace LiteMVCTest\Cli\Module;
 
-use LiteMVC\CLI\Module\ORM;
+use LiteMVC\Cli\Module\Orm;
 
-class ORMTest extends \PHPUnit_Framework_TestCase
+class OrmTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Instance of the ORM module
+     * Instance of the Orm module
      *
-     * $var ORM
+     * $var Orm
      */
     private $_orm;
 
     public function setUp()
     {
-        $this->_orm = new ORM();
+        $this->_orm = new Orm();
     }
 
     /**
-     * Test ORM::showHelp()
+     * Test Orm::showHelp()
      */
     public function testShowHelp()
     {

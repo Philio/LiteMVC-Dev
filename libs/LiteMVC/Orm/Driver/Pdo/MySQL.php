@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * MySQL driver for ORM
+ * MySQL driver for Orm
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,11 +12,9 @@
  * @version 0.4.0
  */
 
-namespace LiteMVC\ORM\Driver;
+namespace LiteMVC\Orm\Driver\Pdo;
 
-use LiteMVC\ORM\ORM;
-
-class MySQL extends AbstractDriver
+class Mysql extends AbstractPdoDriver
 {
 
     /**
@@ -50,40 +48,6 @@ class MySQL extends AbstractDriver
     protected function _getPassword()
     {
         return isset($this->_config['password']) ? $this->_config['password'] : null;
-    }
-
-    /**
-     * Map column type returned by the database to ORM constant
-     *
-     * @param string $type
-     * @param int $precision
-     * @return int
-     */
-    protected function _mapColumnType($type, $precision)
-    {
-        if (is_numeric($precision)) {
-            return ORM::COL_NUMERIC;
-        } else {
-            return ORM::COL_STRING;
-        }
-    }
-
-    /**
-     * Map key type returned by the database to ORM constant
-     *
-     * @param string $type
-     * @return int
-     */
-    protected function _mapKeyType($type)
-    {
-        switch ($type) {
-            case 'PRIMARY KEY':
-                return ORM::KEY_PRIMARY;
-            case 'FOREIGN KEY':
-                return ORM::KEY_FOREIGN;
-            default:
-                return null;
-        }
     }
 
 }

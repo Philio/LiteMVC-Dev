@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * CLI app module tests
+ * Cli app module tests
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,9 +12,9 @@
  * @version 0.4.0
  */
 
-namespace LiteMVCTest\CLI\Module;
+namespace LiteMVCTest\Cli\Module;
 
-use LiteMVC\CLI\Module\App;
+use LiteMVC\Cli\Module\App;
 
 class AppTest extends \PHPUnit_Framework_TestCase
 {
@@ -85,7 +85,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
      */
     public function testAppCreateDuplicate()
     {
-        $this->setExpectedException('LiteMVC\CLI\Module\Exception');
+        $this->setExpectedException('LiteMVC\Cli\Module\Exception');
         ob_start(); // Buffer the output, screws up PHPunit
         $this->_app->create(array('test', __DIR__ . '/TestWorkspace'));
         ob_end_clean(); // Discard the output buffer
@@ -97,7 +97,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
      */
     public function testAppCreateInvalidParams()
     {
-        $this->setExpectedException('LiteMVC\CLI\Module\Exception');
+        $this->setExpectedException('LiteMVC\Cli\Module\Exception');
         $this->_app->create(array());
     }
 
@@ -127,7 +127,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
      */
     public function testAppRemoveNonExistant()
     {
-        $this->setExpectedException('LiteMVC\CLI\Module\Exception');
+        $this->setExpectedException('LiteMVC\Cli\Module\Exception');
         $this->_app->rm(array('test', __DIR__ . '/TestWorkspace'));
     }
 
@@ -136,7 +136,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
      */
     public function testAppRemoveInvalidParams()
     {
-        $this->setExpectedException('LiteMVC\CLI\Module\Exception');
+        $this->setExpectedException('LiteMVC\Cli\Module\Exception');
         $this->_app->rm(array());
     }
 

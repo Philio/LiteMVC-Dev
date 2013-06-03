@@ -15,7 +15,7 @@
 namespace LiteMVCTest\Model\TestAssets;
 
 use LiteMVC\Model\AbstractModel;
-use LiteMVC\ORM\ORM;
+use LiteMVC\Orm\Orm;
 
 class TestModel extends AbstractModel
 {
@@ -41,17 +41,17 @@ class TestModel extends AbstractModel
      */
     protected $_schema = array(
         'person_id' => array(
-            'type' => ORM::COL_NUMERIC,
+            'type' => Orm::COL_NUMERIC,
             'nullable' => false,
             'default' => null
         ),
         'name' => array(
-            'type' => ORM::COL_STRING,
+            'type' => Orm::COL_STRING,
             'nullable' => false,
             'default' => null
         ),
         'age' => array(
-            'type' => ORM::COL_NUMERIC,
+            'type' => Orm::COL_NUMERIC,
             'nullable' => true,
             'default' => null
         )
@@ -74,7 +74,7 @@ class TestModel extends AbstractModel
             array(
                 'model' => 'Model\Address',
                 'field' => 'person_id',
-                'type' => ORM::REL_PARENT
+                'type' => Orm::REL_PARENT
             )
         )
     );

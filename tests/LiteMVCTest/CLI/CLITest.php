@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * CLI tests
+ * Cli tests
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,11 +12,11 @@
  * @version 0.4.0
  */
 
-namespace LiteMVCTest\CLI;
+namespace LiteMVCTest\Cli;
 
-use LiteMVC\CLI\CLI;
+use LiteMVC\Cli\Cli;
 
-class CLITest extends \PHPUnit_Framework_TestCase
+class CliTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -25,7 +25,7 @@ class CLITest extends \PHPUnit_Framework_TestCase
     public function testNoArgsShowHelp()
     {
         $this->expectOutputRegex('/Usage:(.*)Commands:/sm');
-        new CLI(array());
+        new Cli(array());
     }
 
     /**
@@ -34,7 +34,7 @@ class CLITest extends \PHPUnit_Framework_TestCase
     public function testLoadInfoNoArgsShowHelp()
     {
         $this->expectOutputRegex('/Usage:(.*)Commands for info:/sm');
-        new CLI(array(null, 'info'));
+        new Cli(array(null, 'info'));
     }
 
     /**
@@ -43,16 +43,16 @@ class CLITest extends \PHPUnit_Framework_TestCase
     public function testLoadAppNoArgsShowHelp()
     {
         $this->expectOutputRegex('/Usage:(.*)Commands for app:/sm');
-        new CLI(array(null, 'app'));
+        new Cli(array(null, 'app'));
     }
 
     /**
      * Test help is displayed when insufficient args to show info
      */
-    public function testLoadORMNoArgsShowHelp()
+    public function testLoadOrmNoArgsShowHelp()
     {
         $this->expectOutputRegex('/Usage:(.*)Commands for orm:/sm');
-        new CLI(array(null, 'orm'));
+        new Cli(array(null, 'orm'));
     }
 
 }

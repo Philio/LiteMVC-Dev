@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * ORM driver exception
+ * Cli module exception
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,7 +12,7 @@
  * @version 0.4.0
  */
 
-namespace LiteMVC\ORM\Driver;
+namespace LiteMVC\Cli\Module;
 
 class Exception extends \Exception
 {

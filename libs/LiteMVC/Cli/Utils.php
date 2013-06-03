@@ -3,7 +3,7 @@
 /**
 * LiteMVC Application Framework
 *
-* CLI interpreter
+* Cli interpreter
 *
 * @author Phil Bayfield
 * @copyright 2010 - 2013
@@ -12,17 +12,24 @@
 * @version 0.4.0
 */
 
-namespace LiteMVC\CLI;
+namespace LiteMVC\Cli;
 
 class Utils
 {
 
     /**
-     * CLI command
+     * Cli command
      *
      * @var string
      */
     const CMD = 'LiteMVC';
+
+    /**
+     * Indent for command description
+     *
+     * @var int
+     */
+    const DESC_INDENT = 50;
 
     /**
      * Color codes
@@ -46,24 +53,6 @@ class Utils
     const COLOR_LIGHT_GREY = "\033[0;37m";
     const COLOR_WHITE = "\033[1;37m";
     const COLOR_TERMINATOR = "\033[0m";
-
-    /**
-     * Indent for command description
-     *
-     * @var int
-     */
-    const DESC_INDENT = 50;
-
-    /**
-     * Apply BASH color codes to some text
-     *
-     * @param type $text
-     * @param type $color
-     */
-    public static function colorise($text, $color)
-    {
-        return $color . $text . self::COLOR_TERMINATOR;
-    }
 
     /**
      * A large ASCII logo
@@ -111,5 +100,15 @@ class Utils
         echo PHP_EOL . PHP_EOL;
     }
 
+    /**
+     * Apply BASH color codes to some text
+     *
+     * @param type $text
+     * @param type $color
+     */
+    public static function colorise($text, $color)
+    {
+        return $color . $text . self::COLOR_TERMINATOR;
+    }
 
 }

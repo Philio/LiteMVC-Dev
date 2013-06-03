@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * CLI module exception
+ * Cli module interface
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,9 +12,14 @@
  * @version 0.4.0
  */
 
-namespace LiteMVC\CLI\Module;
+namespace LiteMVC\Cli\Module;
 
-class Exception extends \Exception
+interface ModuleInterface
 {
+
+    /**
+     * Show help for the module
+     */
+    public function showHelp();
 
 }

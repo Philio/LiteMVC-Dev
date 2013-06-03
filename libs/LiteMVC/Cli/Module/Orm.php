@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * CLI ORM module
+ * Cli Orm module
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,12 +12,11 @@
  * @version 0.4.0
  */
 
-namespace LiteMVC\CLI\Module;
+namespace LiteMVC\Cli\Module;
 
-use LiteMVC\CLI\CLI;
-use LiteMVC\CLI\Utils;
+use LiteMVC\Cli\Utils;
 
-class ORM extends AbstractModule
+class Orm implements ModuleInterface
 {
 
     /**

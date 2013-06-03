@@ -15,7 +15,7 @@
 namespace LiteMVC\Model;
 
 use LiteMVC\Resource;
-use LiteMVC\ORM\ORM;
+use LiteMVC\Orm\Orm;
 
 abstract class AbstractModel extends Resource\AbstractDataset
 {
@@ -41,7 +41,7 @@ abstract class AbstractModel extends Resource\AbstractDataset
      *
      * array(
      *     'field_name' => array(
-     *         'type' => ORM::COL_* constant,
+     *         'type' => Orm::COL_* constant,
      *         'nullable' => boolean,
      *         'default' => mixed
      *     ),
@@ -71,7 +71,7 @@ abstract class AbstractModel extends Resource\AbstractDataset
      *         array(
      *             'model' => string,
      *             'field' => string,
-     *             'type' => ORM::REL_* constant
+     *             'type' => Orm::REL_* constant
      *         ),
      *     ),
      *     ...

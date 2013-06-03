@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * CLI info module tests
+ * Cli info module tests
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,9 +12,9 @@
  * @version 0.4.0
  */
 
-namespace LiteMVCTest\CLI\Module;
+namespace LiteMVCTest\Cli\Module;
 
-use LiteMVC\CLI\Module\Info;
+use LiteMVC\Cli\Module\Info;
 
 class InfoTest extends \PHPUnit_Framework_TestCase
 {

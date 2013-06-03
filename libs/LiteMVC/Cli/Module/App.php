@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * CLI application module
+ * Cli application module
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,12 +12,11 @@
  * @version 0.4.0
  */
 
-namespace LiteMVC\CLI\Module;
+namespace LiteMVC\Cli\Module;
 
-use LiteMVC\CLI\CLI;
-use LiteMVC\CLI\Utils;
+use LiteMVC\Cli\Utils;
 
-class App extends AbstractModule
+class App implements ModuleInterface
 {
 
     /**
@@ -138,13 +137,13 @@ class App extends AbstractModule
         // Iterate skeleton directory and copy any files
         $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/AppAssets/skel', \FilesystemIterator::SKIP_DOTS));
         $templateVars = $this->_createTemplateVars($name);
-        foreach ($iterator as $filename => $fileInfo) {
+        foreach ($iterator as $fileInfo) {
             // Get file and replace template vars
-            $contents = file_get_contents($filename);
+            $contents = file_get_contents($fileInfo->getRealpath());
             foreach ($templateVars as $search => $replace) {
                 $contents = str_ireplace($search, $replace, $contents);
             }
-            $newFile = str_ireplace(__DIR__ . '/AppAssets/skel', $path . '/' . $name, str_replace('.template', '', $filename));
+            $newFile = str_ireplace(__DIR__ . '/AppAssets/skel', $path . '/' . $name, str_replace('.template', '', $fileInfo->getRealpath()));
             file_put_contents($newFile, $contents);
             echo Utils::colorise(realpath($newFile), Utils::COLOR_LIGHT_CYAN) . PHP_EOL;
         }
@@ -176,12 +175,12 @@ class App extends AbstractModule
 
         // Iterate director and remove contents
         $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST);
-        foreach ($iterator as $filename => $fileInfo) {
+        foreach ($iterator as $fileInfo) {
             echo Utils::colorise($fileInfo->getRealPath(), Utils::COLOR_LIGHT_CYAN) . PHP_EOL;
             if ($fileInfo->isDir()) {
-                rmdir($filename);
+                rmdir($fileInfo->getRealPath());
             } else {
-                unlink($filename);
+                unlink($fileInfo->getRealPath());
             }
         }
 

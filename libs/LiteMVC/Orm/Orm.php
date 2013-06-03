@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * ORM
+ * Orm
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2013
@@ -12,11 +12,11 @@
  * @version 0.4.0
  */
 
-namespace LiteMVC\ORM;
+namespace LiteMVC\Orm;
 
 use LiteMVC\Resource;
 
-class ORM extends Resource\AbstractResource
+class Orm extends Resource\AbstractResource
 {
 
     /**
@@ -42,5 +42,7 @@ class ORM extends Resource\AbstractResource
      */
     const REL_PARENT = 0;
     const REL_CHILD = 1;
+
+
 
 }

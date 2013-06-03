@@ -35,31 +35,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Config::load() for php file with environment
-     */
-    public function testLoadEnvPhp()
-    {
-        $config = new Config\Config();
-        $config->load(__DIR__ . '/TestAssets/TestWithEnvConfig.php', 'testing', Config\Config::TYPE_PHP);
-        $this->assertTrue(isset($config['test']));
-        $this->assertEquals($config['test']['integer'], 1);
-        $this->assertTrue($config['test']['boolean']);
-        $this->assertEquals($config['test']['string'], 'string');
-        $this->assertContains('item1', $config['test']['array']);
-        $this->assertContains('item2', $config['test']['array']);
-    }
-
-    /**
-     * Test Config::load() for php file with bad environment
-     */
-    public function testLoadPhpBadEnv()
-    {
-        $this->setExpectedException('LiteMVC\Config\Exception');
-        $config = new Config\Config();
-        $config->load(__DIR__ . '/TestAssets/TestWithEnvConfig.php', 'badenv', Config\Config::TYPE_PHP);
-    }
-
-    /**
      * Test Config::load() for ini file
      */
     public function testLoadIni()

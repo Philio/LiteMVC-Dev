@@ -14,7 +14,7 @@
 
 namespace LiteMVCTest\Config\Parser;
 
-use LiteMVC\Config\Parser\PhpParser;
+use LiteMVC\Config\Parser\Php;
 
 class PhpParserTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,13 +22,13 @@ class PhpParserTest extends \PHPUnit_Framework_TestCase
     /**
      * Instance of the PHP parser
      *
-     * @var PhpParser
+     * @var Php
      */
     private $_parser;
 
     public function setUp()
     {
-        $this->_parser = new PhpParser();
+        $this->_parser = new Php();
     }
 
     /**

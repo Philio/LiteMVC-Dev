@@ -59,11 +59,11 @@ class Config extends Resource\AbstractDataset
         // Load appropriate parser or throw exception
         switch ($type) {
             case self::TYPE_PHP:
-                $parser = new Parser\PhpParser();
+                $parser = new Parser\Php();
                 $this->_data = $parser->parse($file, $environment);
                 break;
             case self::TYPE_INI:
-                $parser = new Parser\IniParser();
+                $parser = new Parser\Ini();
                 $this->_data = $parser->parse($file, $environment);
                 break;
             default:

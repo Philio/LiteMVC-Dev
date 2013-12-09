@@ -15,10 +15,20 @@
 namespace LiteMVC\Orm\Driver;
 
 use LiteMVC\Resource\AbstractResource;
+use LiteMVC\Orm\Orm;
 use LiteMVC\Orm\Driver\Exception;
 
 abstract class AbstractDriver extends AbstractResource
 {
+
+    /**
+     * Default configuration
+     *
+     * @var array
+     */
+    protected $_configDefaults = array(
+        'host' => 'localhost'
+    );
 
     /**
      * Connection to the database
@@ -28,11 +38,31 @@ abstract class AbstractDriver extends AbstractResource
     protected $_connection;
 
     /**
+     * Allowed access modes
+     *
+     * @return int
+     */
+    public function getAccessMode()
+    {
+        if (isset($this->_config['access_mode'])) {
+            return $this->_config['access_mode'];
+        }
+        return ORM::ACCESS_READ | ORM::ACCESS_WRITE;
+    }
+
+    /**
      * Connect to the database
      *
-     * @return void
+     * @throws \LiteMVC\Orm\Driver\Exception
      */
     abstract public function connect();
+
+    /**
+     * Check if driver is connected
+     *
+     * @return boolean
+     */
+    abstract public function isConnected();
 
     /**
      * Disconnect from the database

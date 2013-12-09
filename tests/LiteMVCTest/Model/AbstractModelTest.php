@@ -14,9 +14,9 @@
 
 namespace LiteMVCTest\Model;
 
-require_once('TestAssets/TestModel.php');
+require_once 'TestAssets/PersonModel.php';
 
-use LiteMVCTest\Model\TestAssets\TestModel;
+use LiteMVCTest\Model\TestAssets\PersonModel;
 
 class AbstractModelTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,7 +26,7 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDatabase()
     {
-        $model = new TestModel();
+        $model = new PersonModel();
         $this->assertEquals($model->getDatabase(), 'test');
     }
 
@@ -35,7 +35,7 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTable()
     {
-        $model = new TestModel();
+        $model = new PersonModel();
         $this->assertEquals($model->getTable(), 'person');
     }
 
@@ -44,7 +44,7 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSchema()
     {
-        $model = new TestModel();
+        $model = new PersonModel();
         $this->assertArrayHasKey('person_id', $model->getSchema());
         $this->assertArrayHasKey('name', $model->getSchema());
         $this->assertArrayHasKey('age', $model->getSchema());
@@ -55,7 +55,7 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPrimaryKey()
     {
-        $model = new TestModel();
+        $model = new PersonModel();
         $this->assertContains('person_id', $model->getPrimaryKey());
     }
 
@@ -64,7 +64,7 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRelationships()
     {
-        $model = new TestModel();
+        $model = new PersonModel();
         $this->assertTrue(array_key_exists('person_id', $model->getRelationships()));
     }
 

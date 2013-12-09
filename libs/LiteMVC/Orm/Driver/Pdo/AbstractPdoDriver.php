@@ -62,6 +62,19 @@ abstract class AbstractPdoDriver extends AbstractDriver {
     }
 
     /**
+     * Check if driver is connected
+     *
+     * @return boolean
+     */
+    public function isConnected()
+    {
+        if ($this->_connection instanceof \PDO) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Disconnect from the database
      *
      * @throws \LiteMVC\Orm\Driver\Exception

@@ -14,7 +14,7 @@
 
 namespace LiteMVCTest\Config\Parser;
 
-use LiteMVC\Config\Parser\IniParser;
+use LiteMVC\Config\Parser\Ini;
 
 class IniParserTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,13 +22,13 @@ class IniParserTest extends \PHPUnit_Framework_TestCase
     /**
      * Instance of the parser
      *
-     * @var IniParser
+     * @var Ini
      */
     private $_parser;
 
     public function setUp()
     {
-        $this->_parser = new IniParser();
+        $this->_parser = new Ini();
     }
 
     /**

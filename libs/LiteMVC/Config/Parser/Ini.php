@@ -16,7 +16,7 @@ namespace LiteMVC\Config\Parser;
 
 use LiteMVC\Config\Exception;
 
-class IniParser implements ParserInterface
+class Ini implements ParserInterface
 {
 
     // Separators

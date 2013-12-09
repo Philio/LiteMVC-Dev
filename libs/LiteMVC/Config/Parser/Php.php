@@ -16,7 +16,7 @@ namespace LiteMVC\Config\Parser;
 
 use LiteMVC\Config\Exception;
 
-class PhpParser implements ParserInterface
+class Php implements ParserInterface
 {
 
     /**

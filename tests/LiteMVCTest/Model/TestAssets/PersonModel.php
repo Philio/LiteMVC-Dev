@@ -17,7 +17,7 @@ namespace LiteMVCTest\Model\TestAssets;
 use LiteMVC\Model\AbstractModel;
 use LiteMVC\Orm\Orm;
 
-class TestModel extends AbstractModel
+class PersonModel extends AbstractModel
 {
 
     /**

@@ -16,5 +16,5 @@ namespace LiteMVCTest\Autoloader\TestAssets;
 
 class TestClassUniversal2
 {
-
+    
 }

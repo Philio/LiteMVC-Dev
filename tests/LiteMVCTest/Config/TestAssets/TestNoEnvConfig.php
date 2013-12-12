@@ -1,4 +1,5 @@
 <?php
+
 return array(
     'test' => array(
         'integer' => 1,

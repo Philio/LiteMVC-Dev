@@ -24,5 +24,4 @@ interface ParserInterface
      * @return array
      */
     public function parse($file, $environment = null);
-
 }

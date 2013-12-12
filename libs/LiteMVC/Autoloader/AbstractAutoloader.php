@@ -72,5 +72,4 @@ abstract class AbstractAutoloader extends Resource\AbstractResource
      * @param string $class
      */
     abstract public function load($class);
-
 }

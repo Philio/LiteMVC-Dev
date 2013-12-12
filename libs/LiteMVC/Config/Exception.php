@@ -16,5 +16,5 @@ namespace LiteMVC\Config;
 
 class Exception extends \Exception
 {
-
+    
 }

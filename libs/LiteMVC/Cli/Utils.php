@@ -1,16 +1,16 @@
 <?php
 
 /**
-* LiteMVC Application Framework
-*
-* Cli interpreter
-*
-* @author Phil Bayfield
-* @copyright 2010 - 2013
-* @license GNU General Public License version 3
-* @package LiteMVC
-* @version 0.4.0
-*/
+ * LiteMVC Application Framework
+ *
+ * Cli interpreter
+ *
+ * @author Phil Bayfield
+ * @copyright 2010 - 2013
+ * @license GNU General Public License version 3
+ * @package LiteMVC
+ * @version 0.4.0
+ */
 
 namespace LiteMVC\Cli;
 
@@ -62,10 +62,10 @@ class Utils
     public static function logo()
     {
         return ' _     _ _       __  ____     ______' . PHP_EOL .
-        '| |   (_) |_ ___|  \/  \ \   / / ___|' . PHP_EOL .
-        '| |   | | __/ _ \ |\/| |\ \ / / |' . PHP_EOL .
-        '| |___| | ||  __/ |  | | \ V /| |___' . PHP_EOL .
-        '|_____|_|\__\___|_|  |_|  \_/  \____|' . PHP_EOL . PHP_EOL;
+                '| |   (_) |_ ___|  \/  \ \   / / ___|' . PHP_EOL .
+                '| |   | | __/ _ \ |\/| |\ \ / / |' . PHP_EOL .
+                '| |___| | ||  __/ |  | | \ V /| |___' . PHP_EOL .
+                '|_____|_|\__\___|_|  |_|  \_/  \____|' . PHP_EOL . PHP_EOL;
     }
 
     /**

@@ -17,7 +17,8 @@ namespace LiteMVC\Orm\Driver\PDO;
 use LiteMVC\Orm\Driver\AbstractDriver;
 use LiteMVC\Orm\Driver\Exception;
 
-abstract class AbstractPdoDriver extends AbstractDriver {
+abstract class AbstractPdoDriver extends AbstractDriver
+{
 
     /**
      * Connection to the database

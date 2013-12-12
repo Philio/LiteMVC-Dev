@@ -70,5 +70,4 @@ abstract class AbstractDriver extends AbstractResource
      * @throws \LiteMVC\Orm\Driver\Exception
      */
     abstract public function disconnect();
-
 }

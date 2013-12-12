@@ -23,7 +23,6 @@ class Config extends Resource\AbstractDataset
     const TYPE_AUTO_EXT = 0;
     const TYPE_PHP = 1;
     const TYPE_INI = 2;
-
     // Supported extensions
     const EXT_PHP = 'php';
     const EXT_INI = 'ini';

@@ -37,9 +37,9 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     public function testShowHelp()
     {
         $this->expectOutputRegex(
-            '/info(.*)all(.*)display all available information(.*)info(.*)version(.*)display software ' .
-            'version(.*)info(.*)copyright(.*)display copyright information(.*)info(.*)license(.*)display ' .
-            'license information/sm'
+                '/info(.*)all(.*)display all available information(.*)info(.*)version(.*)display software ' .
+                'version(.*)info(.*)copyright(.*)display copyright information(.*)info(.*)license(.*)display ' .
+                'license information/sm'
         );
         $this->_info->showHelp();
     }

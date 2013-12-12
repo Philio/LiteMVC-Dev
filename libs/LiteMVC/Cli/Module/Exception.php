@@ -16,5 +16,5 @@ namespace LiteMVC\Cli\Module;
 
 class Exception extends \Exception
 {
-
+    
 }

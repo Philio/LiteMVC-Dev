@@ -26,7 +26,7 @@ class OrmTest extends \PHPUnit_Framework_TestCase
     /**
      * A basic test to check that the correct driver is loaded
      */
-    public function testLoadDrivers()
+    public function testLoadDriver()
     {
         $orm = new Orm(array(
             'test_pdo_mysql' => array(
@@ -45,18 +45,96 @@ class OrmTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test missing config throws exception
+     */
+    public function testLoadDriverMissingConfig()
+    {
+        $this->setExpectedException('LiteMVC\Orm\Exception');
+        $orm = new Orm();
+        $orm->loadDriver('non_existant_config', Orm::ACCESS_READ);
+    }
+
+    /**
+     * Test wrong config throws exception
+     */
+    public function testLoadDriverWrongConfig()
+    {
+        $this->setExpectedException('LiteMVC\Orm\Exception');
+        $orm = new Orm(array(
+            'test_pdo_mysql' => array(
+                array(
+                    'driver' => 'pdo_mysql'
+                )
+            )
+        ));
+        $orm->loadDriver('wrong_config', Orm::ACCESS_READ);
+    }
+
+    /**
+     * Test wrong access level throws exception
+     */
+    public function testLoadDriverWrongAccessLevel()
+    {
+        $this->setExpectedException('LiteMVC\Orm\Exception');
+        $orm = new Orm(array(
+            'test_pdo_mysql' => array(
+                array(
+                    'driver' => 'pdo_mysql',
+                    'access_mode' => Orm::ACCESS_READ
+                )
+            )
+        ));
+        $orm->loadDriver('test_pdo_mysql', Orm::ACCESS_WRITE);
+    }
+
+    /**
      * Test loading a driver from a model
      */
-    public function testLoadDriverFromModel()
+    public function testGetDriverFromModel()
     {
         $orm = new Orm(array(
-           'test' => array(
-               array(
-                   'driver_class' => 'LiteMVCTest\Orm\TestAssets\DummyDriver'
-               )
-           )
+            'test' => array(
+                array(
+                    'driver_class' => 'LiteMVCTest\Orm\TestAssets\DummyDriver'
+                )
+            )
         ));
         $this->assertInstanceOf('LiteMVCTest\Orm\TestAssets\DummyDriver', $orm->getDriver('LiteMVCTest\Model\TestAssets\PersonModel', Orm::ACCESS_READ));
+    }
+
+    /**
+     * Test that an invalid model class name throws an exception
+     */
+    public function testGetDriverInvalidClassName()
+    {
+        $this->setExpectedException('LiteMVC\Orm\Exception');
+        $orm = new Orm();
+        $orm->getDriver('LiteMVCTest\Model\TestAssets\NonExistantModel', Orm::ACCESS_READ);
+    }
+
+    /**
+     * Test that an invalid model throws an exception
+     */
+    public function testGetDriverInvalidModel()
+    {
+        $this->setExpectedException('LiteMVC\Orm\Exception');
+        $orm = new Orm();
+        $orm->getDriver(new \stdClass(), Orm::ACCESS_READ);
+    }
+
+    /**
+     * Test that multiple model instances using the same driver get the same instance of the driver
+     */
+    public function testGetDriverSingleInstance()
+    {
+        $orm = new Orm(array(
+            'test' => array(
+                array(
+                    'driver_class' => 'LiteMVCTest\Orm\TestAssets\DummyDriver'
+                )
+            )
+        ));
+        $this->assertSame($orm->getDriver('LiteMVCTest\Model\TestAssets\PersonModel', Orm::ACCESS_READ), $orm->getDriver('LiteMVCTest\Model\TestAssets\PersonModel', Orm::ACCESS_READ));
     }
 
 }

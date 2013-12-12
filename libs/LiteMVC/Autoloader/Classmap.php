@@ -60,6 +60,7 @@ class Classmap extends AbstractAutoloader
             'LiteMVC\Orm\Driver\Pdo\AbstractPdoDriver' => '/Orm/Driver/Pdo/AbstractPdoDriver.php',
             'LiteMVC\Orm\Driver\Pdo\Mysql' => '/Orm/Driver/Pdo/Mysql.php',
             'LiteMVC\Orm\Driver\Pdo\Postgresql' => '/Orm/Driver/Pdo/Postgresql.php',
+            'LiteMVC\Orm\Exception' => '/Orm/Exception.php',
             'LiteMVC\Orm\Orm' => '/Orm/Orm.php',
             'LiteMVC\Resource\AbstractDataset' => '/Resource/AbstractDataset.php',
             'LiteMVC\Resource\AbstractResource' => '/Resource/AbstractResource.php',

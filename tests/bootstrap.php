@@ -11,6 +11,5 @@
  * @package tests
  * @version 0.4.0
  */
-
 require_once 'libs/LiteMVC/Autoloader/Classmap.php';
 new LiteMVC\Autoloader\Classmap();

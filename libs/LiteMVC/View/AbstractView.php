@@ -18,5 +18,5 @@ use LiteMVC\Resource;
 
 abstract class AbstractView extends Resource\AbstractDataset
 {
-
+    
 }

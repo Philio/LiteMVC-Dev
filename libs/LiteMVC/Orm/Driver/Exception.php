@@ -16,5 +16,5 @@ namespace LiteMVC\Orm\Driver;
 
 class Exception extends \Exception
 {
-
+    
 }

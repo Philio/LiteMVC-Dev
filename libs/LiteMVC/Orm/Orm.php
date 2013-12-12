@@ -86,17 +86,20 @@ class Orm extends Resource\AbstractResource
     public function getDriver($model, $mode)
     {
         // Instantiate the model if necessary to get the database name
-        if (!$model instanceof AbstractModel) {
+        if (is_string($model)) {
             if (!class_exists($model)) {
-                throw new Exception("Unknown model");
+                throw new Exception("Invalid model class name");
             }
             $model = new $model();
+        }
+        if (!$model instanceof AbstractModel) {
+            throw new Exception("Model must be an instance or class name of an instance of AbstractModel");
         }
         $dbName = $model->getDatabase();
 
         // Check if driver is loaded
         if (isset($this->_drivers[$dbName])) {
-            foreach ($this->_drivers as $driver) {
+            foreach ($this->_drivers[$dbName] as $driver) {
                 if ($driver->getAccessMode() & $mode) {
                     return $driver;
                 }

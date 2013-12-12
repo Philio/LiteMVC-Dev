@@ -65,8 +65,7 @@ class Ini implements ParserInterface
                         throw new Exception('An environment can not extend multiple other environments');
                     }
                     return $this->_arrayMerge(
-                        $this->_parseIni($ini, trim($parts[1])),
-                        $this->_parseEnvironment($value)
+                                    $this->_parseIni($ini, trim($parts[1])), $this->_parseEnvironment($value)
                     );
                 }
             }
@@ -104,7 +103,7 @@ class Ini implements ParserInterface
                 $config[$parts[0]] = array();
             }
             $config[$parts[0]] = $this->_parseKey(
-                $config[$parts[0]], $parts[1], $value
+                    $config[$parts[0]], $parts[1], $value
             );
         } else {
             $config[$key] = $value;

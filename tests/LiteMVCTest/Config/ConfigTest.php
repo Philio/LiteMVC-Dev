@@ -43,7 +43,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config->load(__DIR__ . '/TestAssets/TestNoEnvConfig.ini', null, Config\Config::TYPE_INI);
         $this->assertTrue(isset($config['test']));
         $this->assertEquals($config['test']['integer'], 1);
-        $this->assertTrue((bool)$config['test']['boolean']);
+        $this->assertTrue((bool) $config['test']['boolean']);
         $this->assertEquals($config['test']['string'], 'string');
         $this->assertContains('item1', $config['test']['array']);
         $this->assertContains('item2', $config['test']['array']);

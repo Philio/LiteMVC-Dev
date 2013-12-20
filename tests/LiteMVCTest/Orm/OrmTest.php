@@ -136,5 +136,30 @@ class OrmTest extends \PHPUnit_Framework_TestCase
         ));
         $this->assertSame($orm->getDriver('LiteMVCTest\Model\TestAssets\PersonModel', Orm::ACCESS_READ), $orm->getDriver('LiteMVCTest\Model\TestAssets\PersonModel', Orm::ACCESS_READ));
     }
+    
+    /**
+     * Test that multiple drivers will be used when using specific read/write modes
+     */
+    public function testDifferentModes()
+    {
+        $orm = new Orm(array(
+            'test' => array(
+                array(
+                    'driver_class' => 'LiteMVCTest\Orm\TestAssets\DummyDriver',
+                    'access_mode' => Orm::ACCESS_READ
+                ),
+                array(
+                    'driver_class' => 'LiteMVCTest\Orm\TestAssets\DummyDriver',
+                    'access_mode' => Orm::ACCESS_WRITE
+                )
+            )
+        ));
+        $this->assertThat(
+                $orm->getDriver('LiteMVCTest\Model\TestAssets\PersonModel', Orm::ACCESS_READ),
+                $this->logicalNot(
+                        $this->equalTo($orm->getDriver('LiteMVCTest\Model\TestAssets\PersonModel', Orm::ACCESS_WRITE))
+                )
+        );
+    }
 
 }

@@ -32,8 +32,8 @@ abstract class AbstractDriver extends AbstractResource
 
     /**
      * Connection to the database
-     *
-     * @throws \LiteMVC\Orm\Driver\Exception
+     * 
+     * @var object
      */
     protected $_connection;
 
@@ -47,13 +47,13 @@ abstract class AbstractDriver extends AbstractResource
         if (isset($this->_config['access_mode'])) {
             return $this->_config['access_mode'];
         }
-        return ORM::ACCESS_READ | ORM::ACCESS_WRITE;
+        return Orm::ACCESS_READ | Orm::ACCESS_WRITE;
     }
 
     /**
      * Connect to the database
      *
-     * @throws \LiteMVC\Orm\Driver\Exception
+     * @throws Exception
      */
     abstract public function connect();
 
@@ -67,7 +67,7 @@ abstract class AbstractDriver extends AbstractResource
     /**
      * Disconnect from the database
      *
-     * @throws \LiteMVC\Orm\Driver\Exception
+     * @throws Exception
      */
     abstract public function disconnect();
 }

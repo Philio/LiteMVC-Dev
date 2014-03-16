@@ -6,7 +6,7 @@
  * Config parser
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package LiteMVC
  * @version 0.4.0
@@ -19,11 +19,20 @@ use LiteMVC\Resource;
 class Config extends Resource\AbstractDataset
 {
 
-    // Configuration types
+    /**
+     * Configuration types
+     *
+     * @var int
+     */
     const TYPE_AUTO_EXT = 0;
     const TYPE_PHP = 1;
     const TYPE_INI = 2;
-    // Supported extensions
+
+    /**
+     * Supported extensions
+     *
+     * @var string
+     */
     const EXT_PHP = 'php';
     const EXT_INI = 'ini';
 

@@ -6,7 +6,7 @@
  * Orm
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package LiteMVC
  * @version 0.4.0
@@ -14,8 +14,8 @@
 
 namespace LiteMVC\Orm;
 
-use LiteMVC\Resource;
 use LiteMVC\Model\AbstractModel;
+use LiteMVC\Resource;
 
 class Orm extends Resource\AbstractResource
 {
@@ -129,7 +129,8 @@ class Orm extends Resource\AbstractResource
 
         // Iterate configuration to find the configuration for a suitable driver
         foreach ($this->_config[$dbName] as $config) {
-            $configMode = isset($config['access_mode']) ? $config['access_mode'] : self::ACCESS_READ | self::ACCESS_WRITE;
+            $configMode =
+                isset($config['access_mode']) ? $config['access_mode'] : self::ACCESS_READ | self::ACCESS_WRITE;
             if ($configMode & $mode) {
                 return Driver\Factory::fromConfig($config);
             }

@@ -6,7 +6,7 @@
  * Classmap autoloader
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package Autoloader
  * @version 0.4.0
@@ -133,8 +133,8 @@ class Classmap extends AbstractAutoloader
     /**
      * Add a class to the class map
      *
-     * @param $class
-     * @param $path
+     * @param string $class
+     * @param string $path
      */
     public function addClass($class, $path)
     {

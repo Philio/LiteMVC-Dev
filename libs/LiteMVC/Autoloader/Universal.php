@@ -6,7 +6,7 @@
  * Namespace autoloader
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package Autoloader
  * @version 0.4.0
@@ -76,8 +76,8 @@ class Universal extends AbstractAutoloader
     /**
      * Add a namespace to the autoloader
      *
-     * @param $namespace
-     * @param $path
+     * @param string $namespace
+     * @param string $path
      */
     public function addNamespace($namespace, $path)
     {

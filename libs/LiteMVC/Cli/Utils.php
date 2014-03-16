@@ -6,7 +6,7 @@
  * Cli interpreter
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package LiteMVC
  * @version 0.4.0
@@ -62,10 +62,10 @@ class Utils
     public static function logo()
     {
         return ' _     _ _       __  ____     ______' . PHP_EOL .
-                '| |   (_) |_ ___|  \/  \ \   / / ___|' . PHP_EOL .
-                '| |   | | __/ _ \ |\/| |\ \ / / |' . PHP_EOL .
-                '| |___| | ||  __/ |  | | \ V /| |___' . PHP_EOL .
-                '|_____|_|\__\___|_|  |_|  \_/  \____|' . PHP_EOL . PHP_EOL;
+        '| |   (_) |_ ___|  \/  \ \   / / ___|' . PHP_EOL .
+        '| |   | | __/ _ \ |\/| |\ \ / / |' . PHP_EOL .
+        '| |___| | ||  __/ |  | | \ V /| |___' . PHP_EOL .
+        '|_____|_|\__\___|_|  |_|  \_/  \____|' . PHP_EOL . PHP_EOL;
     }
 
     /**
@@ -77,7 +77,8 @@ class Utils
      * @param array $reqParams
      * @param array $optParams
      */
-    public static function showHelpEntry($moduleName, $actionName, $desc = null, array $reqParams = array(), array $optParams = array())
+    public static function showHelpEntry($moduleName, $actionName, $desc = null, array $reqParams = array(),
+        array $optParams = array())
     {
         // Merge all required params
         $req = array_merge(array(self::CMD, $moduleName, $actionName), $reqParams);
@@ -88,7 +89,8 @@ class Utils
 
         // Show optional params in cyan
         if (count($optParams)) {
-            $optFmt = strlen(implode(' ', $req) . ' ') < self::DESC_INDENT ? '%-' . (self::DESC_INDENT - strlen(implode(' ', $req) . ' ')) . 's' : '%s';
+            $optFmt = strlen(implode(' ', $req) . ' ') < self::DESC_INDENT ?
+                '%-' . (self::DESC_INDENT - strlen(implode(' ', $req) . ' ')) . 's' : '%s';
             echo ' ' . self::colorise(sprintf($optFmt, implode(' ', $optParams)), self::COLOR_LIGHT_CYAN);
         }
 
@@ -103,8 +105,9 @@ class Utils
     /**
      * Apply BASH color codes to some text
      *
-     * @param type $text
-     * @param type $color
+     * @param string $text
+     * @param string $color
+     * @return string
      */
     public static function colorise($text, $color)
     {

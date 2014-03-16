@@ -6,7 +6,7 @@
  * Cli Orm module
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package LiteMVC
  * @version 0.4.0
@@ -31,7 +31,8 @@ class Orm implements ModuleInterface
      */
     public function showHelp()
     {
-        Utils::showHelpEntry(self::NAME, 'gen', 'generate models from database', array('<app>', '<config>'), array('<db>', '<tables>'));
+        Utils::showHelpEntry(self::NAME, 'gen', 'generate models from database', array('<app>', '<config>'),
+            array('<db>', '<tables>'));
     }
 
 }

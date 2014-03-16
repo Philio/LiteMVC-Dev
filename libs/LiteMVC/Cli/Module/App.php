@@ -6,7 +6,7 @@
  * Cli application module
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package LiteMVC
  * @version 0.4.0
@@ -38,7 +38,8 @@ class App implements ModuleInterface
     /**
      * Create a new application
      *
-     * @param $params
+     * @param array $params
+     * @throws Exception
      */
     public function create(array $params)
     {
@@ -63,6 +64,12 @@ class App implements ModuleInterface
         echo PHP_EOL . Utils::colorise('App created successfully', Utils::COLOR_LIGHT_GREEN) . PHP_EOL;
     }
 
+    /**
+     * Remove an application
+     *
+     * @param array $params
+     * @throws Exception
+     */
     public function rm(array $params)
     {
         // Check that at least 1 parameter was given
@@ -86,8 +93,8 @@ class App implements ModuleInterface
     /**
      * Create directories for an application
      *
-     * @param $name
-     * @param $path
+     * @param string $name
+     * @param string $path
      */
     private function _createDirectoryStructure($name, $path)
     {
@@ -116,7 +123,9 @@ class App implements ModuleInterface
     /**
      * Create a single directory and display console output
      *
-     * @param $path
+     * @param string $path
+     * @param int $mode
+     * @param bool $recursive
      */
     private function _createDirectory($path, $mode = 0755, $recursive = false)
     {
@@ -127,15 +136,17 @@ class App implements ModuleInterface
     /**
      * Copy files into the application
      *
-     * @param $name
-     * @param $path
+     * @param string $name
+     * @param string $path
      */
     private function _copyFiles($name, $path)
     {
         echo Utils::colorise('Copying files...', Utils::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
 
         // Iterate skeleton directory and copy any files
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/AppAssets/skel', \FilesystemIterator::SKIP_DOTS));
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator(__DIR__ . '/AppAssets/skel', \FilesystemIterator::SKIP_DOTS)
+        );
         $templateVars = $this->_createTemplateVars($name);
         foreach ($iterator as $fileInfo) {
             // Get file and replace template vars
@@ -143,7 +154,8 @@ class App implements ModuleInterface
             foreach ($templateVars as $search => $replace) {
                 $contents = str_ireplace($search, $replace, $contents);
             }
-            $newFile = str_ireplace(__DIR__ . '/AppAssets/skel', $path . '/' . $name, str_replace('.template', '', $fileInfo->getRealpath()));
+            $newFile = str_ireplace(__DIR__ . '/AppAssets/skel', $path . '/' . $name,
+                str_replace('.template', '', $fileInfo->getRealpath()));
             file_put_contents($newFile, $contents);
             echo Utils::colorise(realpath($newFile), Utils::COLOR_LIGHT_CYAN) . PHP_EOL;
         }
@@ -152,7 +164,7 @@ class App implements ModuleInterface
     /**
      * Generate template replacements for copied default files
      *
-     * @param $name
+     * @param string $name
      * @return array
      */
     private function _createTemplateVars($name)
@@ -167,14 +179,16 @@ class App implements ModuleInterface
     /**
      * Remove all contents of a directory
      *
-     * @param $dir
+     * @param string $dir
      */
     private function _removeAll($dir)
     {
         echo Utils::colorise('Removing files...', Utils::COLOR_LIGHT_GREEN) . PHP_EOL . PHP_EOL;
 
         // Iterate director and remove contents
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST);
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST
+        );
         foreach ($iterator as $fileInfo) {
             echo Utils::colorise($fileInfo->getRealPath(), Utils::COLOR_LIGHT_CYAN) . PHP_EOL;
             if ($fileInfo->isDir()) {

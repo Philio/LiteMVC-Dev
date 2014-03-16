@@ -6,7 +6,7 @@
  * Abstract autoloader
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package Autoloader
  * @version 0.4.0
@@ -22,7 +22,11 @@ require_once __DIR__ . '/../Resource/AbstractResource.php';
 abstract class AbstractAutoloader extends Resource\AbstractResource
 {
 
-    // Configuration constants
+    /**
+     * Configuration constants
+     *
+     * @var string
+     */
     const CONFIG_AUTOREGISTER = "autoregister";
 
     /**

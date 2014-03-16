@@ -6,7 +6,7 @@
  * Abstract driver for Orm
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package LiteMVC
  * @version 0.4.0
@@ -14,9 +14,8 @@
 
 namespace LiteMVC\Orm\Driver;
 
-use LiteMVC\Resource\AbstractResource;
 use LiteMVC\Orm\Orm;
-use LiteMVC\Orm\Driver\Exception;
+use LiteMVC\Resource\AbstractResource;
 
 abstract class AbstractDriver extends AbstractResource
 {
@@ -32,7 +31,7 @@ abstract class AbstractDriver extends AbstractResource
 
     /**
      * Connection to the database
-     * 
+     *
      * @var object
      */
     protected $_connection;

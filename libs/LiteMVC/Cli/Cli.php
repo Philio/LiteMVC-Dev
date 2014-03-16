@@ -6,7 +6,7 @@
  * Cli interpreter
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package LiteMVC
  * @version 0.4.0
@@ -64,6 +64,7 @@ class Cli
      * Show help
      *
      * @param string $moduleName
+     * @param string|null $error
      */
     private function _showHelp($moduleName = null, $error = null)
     {
@@ -74,10 +75,12 @@ class Cli
 
         // Show usage
         echo Utils::colorise('Usage:', Utils::COLOR_YELLOW) . PHP_EOL . PHP_EOL;
-        Utils::showHelpEntry('<module name>', '<action name>', null, array('[required params]'), array('[optional params]'));
+        Utils::showHelpEntry('<module name>', '<action name>', null, array('[required params]'),
+            array('[optional params]'));
 
         // Show commands
-        echo Utils::colorise('Commands' . ($moduleName ? ' for ' . $moduleName : null) . ':', Utils::COLOR_YELLOW) . PHP_EOL . PHP_EOL;
+        echo Utils::colorise('Commands' . ($moduleName ? ' for ' . $moduleName : null) . ':', Utils::COLOR_YELLOW) .
+            PHP_EOL . PHP_EOL;
         if ($moduleName) {
             $className = 'LiteMVC\Cli\Module\\' . $moduleName;
             $module = new $className();

@@ -6,7 +6,7 @@
  * Ini Parser
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package LiteMVC
  * @version 0.4.0
@@ -21,12 +21,14 @@ class Ini implements ParserInterface
 
     // Separators
     const SECTION_SEPARATOR = ':';
+
     const ITEM_SEPARATOR = '.';
 
     /**
      * Parse configuration from file
      *
      * @param string $file
+     * @param string|null $environment
      * @return array
      */
     public function parse($file, $environment = null)
@@ -41,6 +43,8 @@ class Ini implements ParserInterface
      *
      * @param array $ini
      * @param string $environment
+     * @return array
+     * @throws Exception
      */
     protected function _parseIni($ini, $environment)
     {
@@ -65,7 +69,7 @@ class Ini implements ParserInterface
                         throw new Exception('An environment can not extend multiple other environments');
                     }
                     return $this->_arrayMerge(
-                                    $this->_parseIni($ini, trim($parts[1])), $this->_parseEnvironment($value)
+                        $this->_parseIni($ini, trim($parts[1])), $this->_parseEnvironment($value)
                     );
                 }
             }
@@ -78,6 +82,7 @@ class Ini implements ParserInterface
      * Process a section of the ini file
      *
      * @param array $data
+     * @return array
      */
     protected function _parseEnvironment($data)
     {
@@ -94,6 +99,7 @@ class Ini implements ParserInterface
      * @param array $config
      * @param string $key
      * @param mixed $value
+     * @return array
      */
     protected function _parseKey($config, $key, $value)
     {
@@ -103,7 +109,7 @@ class Ini implements ParserInterface
                 $config[$parts[0]] = array();
             }
             $config[$parts[0]] = $this->_parseKey(
-                    $config[$parts[0]], $parts[1], $value
+                $config[$parts[0]], $parts[1], $value
             );
         } else {
             $config[$key] = $value;
@@ -116,6 +122,7 @@ class Ini implements ParserInterface
      *
      * @param array $arrStart
      * @param array $arrAdd
+     * @return array
      */
     protected function _arrayMerge(array $arrStart, array $arrAdd)
     {

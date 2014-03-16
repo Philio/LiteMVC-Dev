@@ -6,7 +6,7 @@
  * Abstract Model
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package LiteMVC
  * @version 0.4.0
@@ -15,7 +15,6 @@
 namespace LiteMVC\Model;
 
 use LiteMVC\Resource;
-use LiteMVC\Orm\Orm;
 
 abstract class AbstractModel extends Resource\AbstractDataset
 {

@@ -6,7 +6,7 @@
  * Select builder for Orm
  *
  * @author Phil Bayfield
- * @copyright 2010 - 2013
+ * @copyright 2010 - 2014
  * @license GNU General Public License version 3
  * @package LiteMVC
  * @version 0.4.0
@@ -96,7 +96,8 @@ class Select extends AbstractQuery
      */
     public function buildQuery()
     {
-        return sprintf('SELECT %s FROM %s %s', $this->_buildColumnList(), $this->_buildTableList(), $this->_buildWhere());
+        return sprintf('SELECT %s FROM %s %s', $this->_buildColumnList(), $this->_buildTableList(),
+            $this->_buildWhere());
     }
 
 } 

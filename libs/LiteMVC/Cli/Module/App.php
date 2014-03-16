@@ -145,7 +145,9 @@ class App implements ModuleInterface
 
         // Iterate skeleton directory and copy any files
         $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator(__DIR__ . '/AppAssets/skel', \FilesystemIterator::SKIP_DOTS)
+            new \RecursiveDirectoryIterator(
+                __DIR__ . '/AppAssets/skel', \FilesystemIterator::SKIP_DOTS
+            )
         );
         $templateVars = $this->_createTemplateVars($name);
         foreach ($iterator as $fileInfo) {

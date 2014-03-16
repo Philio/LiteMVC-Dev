@@ -15,6 +15,7 @@
 namespace LiteMVC\Orm;
 
 use LiteMVC\Model\AbstractModel;
+use LiteMVC\Orm\Query\Select;
 use LiteMVC\Resource;
 
 class Orm extends Resource\AbstractResource
@@ -62,17 +63,35 @@ class Orm extends Resource\AbstractResource
     /**
      * Load a single row and map it to the specified model
      *
-     * @param string $model
+     * @param AbstractModel|string $model
      * @param mixed $id
-     * @return \LiteMVC\Model\AbstractModel
+     * @return AbstractModel
      * @throws \LiteMVC\Orm\Exception
      */
     public function load($model, $id)
     {
-        if (!class_exists($model)) {
-            throw new Exception("Unknown model");
+        // Instantiate model if necessary
+        if (is_string($model)) {
+            if (!class_exists($model)) {
+                throw new Exception("Unknown model");
+            }
+            $model = new $model();
         }
-        return true;
+
+        // Check model inherits from abstract
+        if (!$model instanceof AbstractModel) {
+            throw new Exception('Model should inherit from AbstractModel');
+        }
+
+        // Build select query
+        $select = new Select();
+        $select->from($model->getTable())
+            ->columns('*')
+            ->where($model->getPrimaryKey() . '=?', array($id));
+
+        // TODO actually execute the query
+
+        return $model;
     }
 
     /**

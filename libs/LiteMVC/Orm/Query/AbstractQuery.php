@@ -95,7 +95,7 @@ abstract class AbstractQuery
     public function addColumn($column, $table = null, $identifier = null)
     {
         // Require a valid table name or identifier
-        if (!array_key_exists($table, $this->_tables) && !in_array($table, $this->_tables)) {
+        if ($table != null && !array_key_exists($table, $this->_tables) && !in_array($table, $this->_tables)) {
             throw new Exception('Table name or identifier unknown');
         }
 
@@ -226,6 +226,7 @@ abstract class AbstractQuery
         if ($this->_where != null) {
             return 'WHERE ' . $this->_where;
         }
+        return null;
     }
 
 } 

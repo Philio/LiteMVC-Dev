@@ -22,53 +22,6 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Test AbstractModel::getDatabase()
-     */
-    public function testGetDatabase()
-    {
-        $model = new PersonModel();
-        $this->assertEquals($model->getDatabase(), 'test');
-    }
-
-    /**
-     * Test AbstractModel::geTable()
-     */
-    public function testGetTable()
-    {
-        $model = new PersonModel();
-        $this->assertEquals($model->getTable(), 'person');
-    }
-
-    /**
-     * Test AbstractModel::getSchema()
-     */
-    public function testGetSchema()
-    {
-        $model = new PersonModel();
-        $this->assertArrayHasKey('person_id', $model->getSchema());
-        $this->assertArrayHasKey('name', $model->getSchema());
-        $this->assertArrayHasKey('age', $model->getSchema());
-    }
-
-    /**
-     * Test AbstractModel::getPrimaryKey()
-     */
-    public function testGetPrimaryKey()
-    {
-        $model = new PersonModel();
-        $this->assertContains('person_id', $model->getPrimaryKey());
-    }
-
-    /**
-     * Test AbstractModel::getRelationships()
-     */
-    public function testGetRelationships()
-    {
-        $model = new PersonModel();
-        $this->assertTrue(array_key_exists('person_id', $model->getRelationships()));
-    }
-
-    /**
      * Test model without database name set
      */
     public function testBadDatabaseName()
@@ -116,6 +69,53 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('LiteMVC\Model\Exception');
         $model = $this->getMockForAbstractClass('LiteMVC\Model\AbstractModel');
         $model->getRelationships();
+    }
+
+    /**
+     * Test AbstractModel::getDatabase()
+     */
+    public function testGetDatabase()
+    {
+        $model = new PersonModel();
+        $this->assertEquals($model->getDatabase(), 'test');
+    }
+
+    /**
+     * Test AbstractModel::geTable()
+     */
+    public function testGetTable()
+    {
+        $model = new PersonModel();
+        $this->assertEquals($model->getTable(), 'person');
+    }
+
+    /**
+     * Test AbstractModel::getSchema()
+     */
+    public function testGetSchema()
+    {
+        $model = new PersonModel();
+        $this->assertArrayHasKey('person_id', $model->getSchema());
+        $this->assertArrayHasKey('name', $model->getSchema());
+        $this->assertArrayHasKey('age', $model->getSchema());
+    }
+
+    /**
+     * Test AbstractModel::getPrimaryKey()
+     */
+    public function testGetPrimaryKey()
+    {
+        $model = new PersonModel();
+        $this->assertContains('person_id', $model->getPrimaryKey());
+    }
+
+    /**
+     * Test AbstractModel::getRelationships()
+     */
+    public function testGetRelationships()
+    {
+        $model = new PersonModel();
+        $this->assertTrue(array_key_exists('person_id', $model->getRelationships()));
     }
 
 }

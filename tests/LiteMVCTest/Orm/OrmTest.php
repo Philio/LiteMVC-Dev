@@ -18,7 +18,6 @@ require_once __DIR__ . '/../Model/TestAssets/PersonModel.php';
 require_once 'TestAssets/DummyDriver.php';
 
 use LiteMVC\Orm\Orm;
-use LiteMVCTest\Model\TestAssets\PersonModel;
 
 class OrmTest extends \PHPUnit_Framework_TestCase
 {

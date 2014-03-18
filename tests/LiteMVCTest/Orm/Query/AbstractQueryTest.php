@@ -89,4 +89,76 @@ class AbstractQueryTest extends \PHPUnit_Framework_TestCase
         $query->addColumn('column5', 'table1');
     }
 
-} 
+    public function testWhereString() {
+        $query = $this->_getMock();
+        $query->where('column1 = 1');
+        $where = \PHPUnit_Framework_Assert::readAttribute($query, '_where');
+        $this->assertEquals('column1 = 1', $where);
+    }
+
+    public function testWhereParams() {
+        $query = $this->_getMock();
+        $query->where('column2 = ? AND column3 = ?', array(1, 2));
+        $where = \PHPUnit_Framework_Assert::readAttribute($query, '_where');
+        $this->assertEquals('column2 = ? AND column3 = ?', $where);
+        $params = \PHPUnit_Framework_Assert::readAttribute($query, '_params');
+        $this->assertEquals(array(1, 2), $params);
+    }
+
+    public function testWhereNoParams() {
+        $this->setExpectedException('LiteMVC\Orm\Query\Exception');
+        $query = $this->_getMock();
+        $query->where('column3 = ?');
+    }
+
+    public function testWhereParamMismatch() {
+        $this->setExpectedException('LiteMVC\Orm\Query\Exception');
+        $query = $this->_getMock();
+        $query->where('column4 = ? AND column5 = ?', array(1));
+    }
+
+    public function testBuildTableList() {
+        $query = $this->_getMock();
+        $query->addTable('table1');
+        $query->addTable('table2', 't2');
+
+        $reflection = new \ReflectionClass('LiteMVC\Orm\Query\AbstractQuery');
+        $method = $reflection->getMethod('_buildTableList');
+        $method->setAccessible(true);
+        $this->assertEquals('table1, table2 AS t2', $method->invokeArgs($query, array()));
+    }
+
+    public function testBuildColumnList() {
+        $query = $this->_getMock();
+        $query->addTable('table1', 't1');
+        $query->addTable('table2', 't2');
+        $query->addColumn('column1');
+        $query->addColumn('column2', 't1');
+        $query->addColumn('column2', 't2', 't2c2');
+
+        $reflection = new \ReflectionClass('LiteMVC\Orm\Query\AbstractQuery');
+        $method = $reflection->getMethod('_buildColumnList');
+        $method->setAccessible(true);
+        $this->assertEquals('column1, t1.column2, t2.column2 AS t2c2', $method->invokeArgs($query, array()));
+    }
+
+    public function testBuildWhere() {
+        $query = $this->_getMock();
+        $query->where('column1 = ?', array(1));
+
+        $reflection = new \ReflectionClass('LiteMVC\Orm\Query\AbstractQuery');
+        $method = $reflection->getMethod('_buildWhere');
+        $method->setAccessible(true);
+        $this->assertEquals('WHERE column1 = ?', $method->invokeArgs($query, array()));
+    }
+
+    public function testBuildWhereNull() {
+        $query = $this->_getMock();
+
+        $reflection = new \ReflectionClass('LiteMVC\Orm\Query\AbstractQuery');
+        $method = $reflection->getMethod('_buildWhere');
+        $method->setAccessible(true);
+        $this->assertNull($method->invokeArgs($query, array()));
+    }
+
+}

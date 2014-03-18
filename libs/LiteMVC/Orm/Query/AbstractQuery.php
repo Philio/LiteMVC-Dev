@@ -183,7 +183,7 @@ abstract class AbstractQuery
             if (!is_numeric($identifier)) {
                 $tableList .= ' AS ' . $identifier;
             }
-            if ($identifier != $lastKey) {
+            if ($identifier !== $lastKey) {
                 $tableList .= ', ';
             }
         }
@@ -203,17 +203,17 @@ abstract class AbstractQuery
         reset($this->_columns);
 
         // Add columns to query
-        $column = '';
+        $columns = '';
         foreach ($this->_columns as $identifier => $column) {
-            $column .= $column;
+            $columns .= $column;
             if (!is_numeric($identifier)) {
-                $column .= ' AS ' . $identifier;
+                $columns .= ' AS ' . $identifier;
             }
-            if ($identifier != $lastKey) {
-                $column .= ', ';
+            if ($identifier !== $lastKey) {
+                $columns .= ', ';
             }
         }
-        return $column;
+        return $columns;
     }
 
     /**

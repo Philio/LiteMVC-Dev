@@ -12,7 +12,7 @@
  * @version 0.4.0
  */
 
-namespace LiteMVC\Orm\Driver\PDO;
+namespace LiteMVC\Orm\Driver\Pdo;
 
 use LiteMVC\Orm\Driver\AbstractDriver;
 use LiteMVC\Orm\Driver\Exception;

@@ -27,23 +27,24 @@ class Select extends AbstractQuery
      * from('table_1', 'table_2')
      * from(array('t1' => 'table_1', 't2' => 'table_2'))
      *
-     * @param mixed $table,...
+     * @param mixed $tables,...
      * @return Select
      */
-    public function from($table)
+    public function from($tables)
     {
         // Multiple args accepted as an array
         if (func_num_args() > 1) {
-            $table = func_get_args();
+            $tables = func_get_args();
+        }
+
+        // Convert single arg to array
+        if (is_string($tables)) {
+            $tables = array($tables);
         }
 
         // Iterate array or add string
-        if (is_array($table)) {
-            foreach ($table as $identifier => $table) {
-                $this->addTable($table, !is_numeric($identifier) ? $identifier : null);
-            }
-        } else {
-            $this->addTable($table);
+        foreach ($tables as $identifier => $tables) {
+            $this->addTable($tables, !is_numeric($identifier) ? $identifier : null);
         }
         return $this;
     }
@@ -68,22 +69,25 @@ class Select extends AbstractQuery
             $columns = func_get_args();
         }
 
-        // Iterate array or add string
-        if (is_array($columns)) {
-            foreach ($columns as $key => $value) {
-                if (is_array($value)) {
-                    // Require a table name or identifier as the array key
-                    if (is_numeric($key)) {
-                        throw new Exception('Table name or identifier expected');
-                    }
+        // Convert single arg to array
+        if (is_string($columns)) {
+            $columns = array($columns);
+        }
 
-                    // Add all columns from array
-                    foreach ($value as $identifier => $column) {
-                        $this->addColumn($column, $key, !is_numeric($identifier) ? $identifier : null);
-                    }
-                } else {
-                    $this->addColumn($value, !is_numeric($key) ? $key : null);
+        // Iterate array or add string
+        foreach ($columns as $key => $value) {
+            if (is_array($value)) {
+                // Require a table name or identifier as the array key
+                if (is_numeric($key)) {
+                    throw new Exception('Table name or identifier expected');
                 }
+
+                // Add all columns from array
+                foreach ($value as $identifier => $column) {
+                    $this->addColumn($column, $key, !is_numeric($identifier) ? $identifier : null);
+                }
+            } else {
+                $this->addColumn($value, !is_numeric($key) ? $key : null);
             }
         }
         return $this;

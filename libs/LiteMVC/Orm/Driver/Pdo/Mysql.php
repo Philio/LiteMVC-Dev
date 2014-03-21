@@ -14,7 +14,7 @@
 
 namespace LiteMVC\Orm\Driver\Pdo;
 
-class Mysql extends AbstractPdoDriver
+class MySql extends AbstractPdoDriver
 {
 
     /**

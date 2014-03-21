@@ -100,7 +100,7 @@ class Select extends AbstractQuery
      */
     public function buildQuery()
     {
-        return sprintf('SELECT %s FROM %s %s', $this->_buildColumnList(), $this->_buildTableList(),
+        return sprintf('SELECT %s FROM %s%s', $this->_buildColumnList(), $this->_buildTableList(),
             $this->_buildWhere());
     }
 

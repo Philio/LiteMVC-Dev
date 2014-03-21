@@ -14,7 +14,7 @@
 
 namespace LiteMVC\Orm\Driver\Pdo;
 
-class Postgresql extends AbstractPdoDriver
+class PostgreSql extends AbstractPdoDriver
 {
 
     /**

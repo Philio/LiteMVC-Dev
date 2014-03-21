@@ -86,11 +86,26 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('t1.column3', $cols);
     }
 
-    public function testColumnsInvalidTableArray()
+    public function testColumnsMissingTableIdentifier()
     {
         $this->setExpectedException('LiteMVC\Orm\Query\Exception');
         $select = new Select();
-        $select->columns(array('table1' => array('column1', 'column2', 'column3')));
+        $select->columns(array(array('column1', 'column2', 'column3')));
+    }
+
+    public function testBuildSimpleSelect() {
+        $select = new Select();
+        $select->from('table1');
+        $select->columns('*');
+        $this->assertEquals('SELECT * FROM table1', $select->buildQuery());
+    }
+
+    public function testBuildSimpleSelectWhere() {
+        $select = new Select();
+        $select->from('table1');
+        $select->columns('*');
+        $select->where('column1 = ?', array(1));
+        $this->assertEquals('SELECT * FROM table1 WHERE column1 = ?', $select->buildQuery());
     }
 
 }

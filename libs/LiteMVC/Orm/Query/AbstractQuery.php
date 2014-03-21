@@ -224,7 +224,7 @@ abstract class AbstractQuery
     protected function _buildWhere()
     {
         if ($this->_where != null) {
-            return 'WHERE ' . $this->_where;
+            return ' WHERE ' . $this->_where;
         }
         return null;
     }

@@ -15,6 +15,8 @@
 namespace LiteMVCTest\Orm\TestAssets;
 
 use LiteMVC\Orm\Driver\AbstractDriver;
+use LiteMVC\Orm\Driver\AbstractQuery;
+use LiteMVC\Orm\Driver\AbstractResult;
 use LiteMVC\Orm\Driver\Exception;
 
 class DummyDriver extends AbstractDriver
@@ -51,6 +53,18 @@ class DummyDriver extends AbstractDriver
     public function disconnect()
     {
         $this->_connected = false;
+    }
+
+    /**
+     * Query the database
+     *
+     * @param string | AbstractQuery $statement
+     * @param array | null $args
+     * @return AbstractResult
+     */
+    public function query($statement, array $args = null)
+    {
+        // TODO: Implement query() method.
     }
 
 }

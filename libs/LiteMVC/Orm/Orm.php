@@ -70,18 +70,8 @@ class Orm extends Resource\AbstractResource
      */
     public function load($model, $id)
     {
-        // Instantiate model if necessary
-        if (is_string($model)) {
-            if (!class_exists($model)) {
-                throw new Exception("Unknown model");
-            }
-            $model = new $model();
-        }
-
-        // Check model inherits from abstract
-        if (!$model instanceof AbstractModel) {
-            throw new Exception('Model should inherit from AbstractModel');
-        }
+        // Get model
+        $model = $this->_getModel($model);
 
         // Build select query
         $select = new Select();
@@ -89,7 +79,8 @@ class Orm extends Resource\AbstractResource
             ->columns('*')
             ->where($model->getPrimaryKey() . '=?', array($id));
 
-        // TODO actually execute the query
+        // Query the database
+        $driver = $this->getDriver($model, self::ACCESS_READ);
 
         return $model;
     }
@@ -100,20 +91,11 @@ class Orm extends Resource\AbstractResource
      * @param string | \LiteMVC\Model\AbstractModel $model
      * @param int $mode
      * @return \LiteMVC\Orm\Driver\AbstractDriver
-     * @throws \LiteMVC\Orm\Exception
      */
     public function getDriver($model, $mode)
     {
-        // Instantiate the model if necessary to get the database name
-        if (is_string($model)) {
-            if (!class_exists($model)) {
-                throw new Exception("Invalid model class name");
-            }
-            $model = new $model();
-        }
-        if (!$model instanceof AbstractModel) {
-            throw new Exception("Model must be an instance or class name of an instance of AbstractModel");
-        }
+        // Get model and database name
+        $model = $this->_getModel($model);
         $dbName = $model->getDatabase();
 
         // Check if driver is loaded
@@ -157,6 +139,30 @@ class Orm extends Resource\AbstractResource
 
         // No valid configuration was found
         throw new Exception("Missing database driver configuration");
+    }
+
+    /**
+     * Instantiate and/or validate model
+     *
+     * @param string | \LiteMVC\Model\AbstractModel $model
+     * @return \LiteMVC\Model\AbstractModel
+     * @throws Exception
+     */
+    private function _getModel($model) {
+        // Instantiate if necessary
+        if (is_string($model)) {
+            if (!class_exists($model)) {
+                throw new Exception("Invalid model class name");
+            }
+            $model = new $model();
+        }
+
+        // Check inheritance
+        if (!$model instanceof AbstractModel) {
+            throw new Exception('Model should inherit from AbstractModel');
+        }
+
+        return $model;
     }
 
 }

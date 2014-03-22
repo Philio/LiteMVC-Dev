@@ -70,6 +70,7 @@ abstract class AbstractDataset extends AbstractResource implements \Countable, \
     /**
      * Countable::count() implementation
      *
+     * @link http://php.net/manual/en/countable.count.php
      * @return int
      */
     public function count()
@@ -80,6 +81,7 @@ abstract class AbstractDataset extends AbstractResource implements \Countable, \
     /**
      * ArrayAccess::offsetExists() implementation
      *
+     * @link http://php.net/manual/en/arrayaccess.offsetexists.php
      * @param mixed $offset
      * @return boolean
      */
@@ -91,6 +93,7 @@ abstract class AbstractDataset extends AbstractResource implements \Countable, \
     /**
      * ArrayAccess::offsetGet() implementation
      *
+     * @link http://php.net/manual/en/arrayaccess.offsetget.php
      * @param mixed $offset
      * @return mixed
      */
@@ -102,6 +105,7 @@ abstract class AbstractDataset extends AbstractResource implements \Countable, \
     /**
      * ArrayAccess::offsetSet() implementation
      *
+     * @link http://php.net/manual/en/arrayaccess.offsetset.php
      * @param mixed $offset
      * @param mixed $value
      */
@@ -113,6 +117,7 @@ abstract class AbstractDataset extends AbstractResource implements \Countable, \
     /**
      * ArrayAccess::offsetUnset() implementation
      *
+     * @link http://php.net/manual/en/arrayaccess.offsetunset.php
      * @param mixed $offset
      */
     public function offsetUnset($offset)

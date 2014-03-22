@@ -15,6 +15,7 @@
 namespace LiteMVC\Orm\Driver;
 
 use LiteMVC\Orm\Orm;
+use LiteMVC\Orm\Query\Select;
 use LiteMVC\Resource\AbstractResource;
 
 abstract class AbstractDriver extends AbstractResource
@@ -69,4 +70,13 @@ abstract class AbstractDriver extends AbstractResource
      * @throws Exception
      */
     abstract public function disconnect();
+
+    /**
+     * Query the database
+     *
+     * @param string | AbstractQuery $statement
+     * @param array | null $args
+     * @return AbstractResult
+     */
+    abstract public function query($statement, array $args = null);
 }

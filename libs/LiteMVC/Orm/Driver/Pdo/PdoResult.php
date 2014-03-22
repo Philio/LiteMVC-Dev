@@ -23,7 +23,8 @@ class PdoResult extends AbstractResult
      *
      * @param \PDOStatement $stmt
      */
-    public function __construct(\PDOStatement $stmt) {
+    public function __construct(\PDOStatement $stmt)
+    {
         $this->_affectedRows = $stmt->rowCount();
         $this->_data = $stmt->fetchAll();
     }

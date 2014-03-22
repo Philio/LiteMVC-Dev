@@ -102,7 +102,8 @@ abstract class AbstractPdoDriver extends AbstractDriver
      * @throws Exception
      * @throws \PDOException
      */
-    public function query($statement, array $args = null) {
+    public function query($statement, array $args = null)
+    {
         // Check if statement is a query object
         if ($statement instanceof AbstractQuery) {
             $args = $statement->getQueryParams();

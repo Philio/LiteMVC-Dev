@@ -27,6 +27,7 @@ class Orm extends Resource\AbstractResource
      * @var int
      */
     const COL_STRING = 0;
+
     const COL_NUMERIC = 1;
 
     /**
@@ -35,6 +36,7 @@ class Orm extends Resource\AbstractResource
      * @var int
      */
     const KEY_PRIMARY = 0;
+
     const KEY_FOREIGN = 1;
 
     /**
@@ -43,6 +45,7 @@ class Orm extends Resource\AbstractResource
      * @var int
      */
     const REL_PARENT = 0;
+
     const REL_CHILD = 1;
 
     /**
@@ -51,6 +54,7 @@ class Orm extends Resource\AbstractResource
      * @var int
      */
     const ACCESS_READ = 1;
+
     const ACCESS_WRITE = 2;
 
     /**
@@ -148,7 +152,8 @@ class Orm extends Resource\AbstractResource
      * @return \LiteMVC\Model\AbstractModel
      * @throws Exception
      */
-    private function _getModel($model) {
+    private function _getModel($model)
+    {
         // Instantiate if necessary
         if (is_string($model)) {
             if (!class_exists($model)) {

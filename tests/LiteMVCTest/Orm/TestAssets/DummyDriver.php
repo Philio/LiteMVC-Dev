@@ -28,7 +28,7 @@ class DummyDriver extends AbstractDriver
     /**
      * Connect to the database
      *
-     * @throws \LiteMVC\Orm\Driver\Exception
+     * @throws Exception
      */
     public function connect()
     {
@@ -48,7 +48,7 @@ class DummyDriver extends AbstractDriver
     /**
      * Disconnect from the database
      *
-     * @throws \LiteMVC\Orm\Driver\Exception
+     * @throws Exception
      */
     public function disconnect()
     {
@@ -64,7 +64,7 @@ class DummyDriver extends AbstractDriver
      */
     public function query($statement, array $args = null)
     {
-        // TODO: Implement query() method.
+        return new DummyResult();
     }
 
 }

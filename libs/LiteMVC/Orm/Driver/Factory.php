@@ -51,7 +51,7 @@ class Factory
         // Try and load a driver
         switch ($config['driver']) {
             case self::DRIVER_PDO_MYSQL:
-                return new Pdo\Mysql($config);
+                return new Pdo\MySql($config);
             case self::DRIVER_PDO_POSTGRESQL:
                 return new Pdo\Postgresql($config);
             default:

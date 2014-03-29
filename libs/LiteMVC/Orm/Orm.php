@@ -15,6 +15,7 @@
 namespace LiteMVC\Orm;
 
 use LiteMVC\Model\AbstractModel;
+use LiteMVC\Orm\Driver\AbstractResult;
 use LiteMVC\Orm\Query\Select;
 use LiteMVC\Resource;
 
@@ -81,16 +82,18 @@ class Orm extends Resource\AbstractResource
 
         // Query the database
         $driver = $this->getDriver($model, self::ACCESS_READ);
+        $result = $driver->query($select);
 
-        return $model;
+        // Map the result to the model
+        return $this->_mapToModel($model, $result);
     }
 
     /**
      * Get the driver for a specific model for access mode
      *
-     * @param string | \LiteMVC\Model\AbstractModel $model
+     * @param string | AbstractModel $model
      * @param int $mode
-     * @return \LiteMVC\Orm\Driver\AbstractDriver
+     * @return AbstractDriver
      */
     public function getDriver($model, $mode)
     {
@@ -118,8 +121,8 @@ class Orm extends Resource\AbstractResource
      *
      * @param $dbName
      * @param $mode
-     * @return \LiteMVC\Orm\Driver\AbstractDriver
-     * @throws \LiteMVC\Orm\Exception
+     * @return AbstractDriver
+     * @throws Exception
      */
     public function loadDriver($dbName, $mode)
     {
@@ -144,8 +147,8 @@ class Orm extends Resource\AbstractResource
     /**
      * Instantiate and/or validate model
      *
-     * @param string | \LiteMVC\Model\AbstractModel $model
-     * @return \LiteMVC\Model\AbstractModel
+     * @param string | AbstractModel $model
+     * @return AbstractModel
      * @throws Exception
      */
     private function _getModel($model)
@@ -163,6 +166,19 @@ class Orm extends Resource\AbstractResource
             throw new Exception('Model should inherit from AbstractModel');
         }
 
+        return $model;
+    }
+
+    /**
+     * @param AbstractModel $model
+     * @param AbstractResult $result
+     * @return AbstractModel
+     */
+    private function _mapToModel(AbstractModel $model, AbstractResult $result)
+    {
+        if (count($result) == 1) {
+
+        }
         return $model;
     }
 

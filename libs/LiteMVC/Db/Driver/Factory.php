@@ -14,8 +14,8 @@
 
 namespace LiteMVC\Db\Driver;
 
-
-class Factory {
+class Factory
+{
 
     /**
      * Driver names
@@ -23,7 +23,9 @@ class Factory {
      * $var string
      */
     const DRIVER_PDO_MYSQL = 'pdo_mysql';
+
     const DRIVER_PDO_POSTGRESQL = 'pdo_pgsql';
+
     const DRIVER_PDO_SQLITE = 'pdo_sqlite';
 
     /**

@@ -77,7 +77,8 @@ class Utils
      * @param array $reqParams
      * @param array $optParams
      */
-    public static function showHelpEntry($moduleName, $actionName, $desc = null, array $reqParams = array(), array $optParams = array())
+    public static function showHelpEntry($moduleName, $actionName, $desc = null, array $reqParams = array(),
+        array $optParams = array())
     {
         // Merge all required params
         $req = array_merge(array(self::CMD, $moduleName, $actionName), $reqParams);

@@ -3,7 +3,7 @@
 /**
  * LiteMVC Application Framework
  *
- * ORM driver factory
+ * Driver factory
  *
  * @author Phil Bayfield
  * @copyright 2010 - 2014
@@ -12,21 +12,22 @@
  * @version 0.4.0
  */
 
-namespace LiteMVC\Orm\Driver;
+namespace LiteMVC\Db\Driver;
 
-class Factory
-{
+
+class Factory {
 
     /**
      * Driver names
      *
      * $var string
      */
-    const DRIVER_PDO_MYSQL = "pdo_mysql";
-    const DRIVER_PDO_POSTGRESQL = "pdo_postgres";
+    const DRIVER_PDO_MYSQL = 'pdo_mysql';
+    const DRIVER_PDO_POSTGRESQL = 'pdo_pgsql';
+    const DRIVER_PDO_SQLITE = 'pdo_sqlite';
 
     /**
-     * Get driver based on config
+     * Get driver from config
      *
      * @param array $config
      * @return AbstractDriver
@@ -54,9 +55,11 @@ class Factory
                 return new Pdo\MySql($config);
             case self::DRIVER_PDO_POSTGRESQL:
                 return new Pdo\Postgresql($config);
+            case self::DRIVER_PDO_SQLITE:
+                return new Pdo\Sqlite($config);
             default:
                 throw new Exception(sprintf('Unknown driver %s in configuration', $config['driver']));
         }
     }
 
-}
+} 

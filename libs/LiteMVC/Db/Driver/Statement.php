@@ -14,7 +14,8 @@
 
 namespace LiteMVC\Db\Driver;
 
-interface Statement {
+interface Statement
+{
 
     /**
      * Bind a variable to a corresponding placeholder in the statement

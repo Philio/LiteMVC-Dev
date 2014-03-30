@@ -22,7 +22,8 @@ class Postgresql extends AbstractPdoDriver
      *
      * @return boolean
      */
-    public function isAvailable() {
+    public function isAvailable()
+    {
         if (!extension_loaded('PDO')) {
             return false;
         }

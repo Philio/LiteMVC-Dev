@@ -14,7 +14,8 @@
 
 namespace LiteMVC\Db\Driver;
 
-interface Connection {
+interface Connection
+{
 
     /**
      * Connect to the database
@@ -37,7 +38,7 @@ interface Connection {
      */
     public function disconnect();
 
-   /**
+    /**
      * Prepare a statement
      *
      * @param string $sql

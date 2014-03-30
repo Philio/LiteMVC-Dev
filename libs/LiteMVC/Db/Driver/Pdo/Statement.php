@@ -17,7 +17,8 @@ namespace LiteMVC\Db\Driver\Pdo;
 use LiteMVC\Db\Driver\Exception;
 use LiteMVC\Db\Driver\Statement as DriverStatement;
 
-class Statement extends \PDOStatement implements DriverStatement {
+class Statement extends \PDOStatement implements DriverStatement
+{
 
     /**
      * Protected constructor required by PDO
@@ -70,7 +71,8 @@ class Statement extends \PDOStatement implements DriverStatement {
      * @return boolean
      * @throws Exception
      */
-    public function execute(array $params = null) {
+    public function execute(array $params = null)
+    {
         try {
             return parent::execute($params);
         } catch (\PDOException $e) {

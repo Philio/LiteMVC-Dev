@@ -14,8 +14,6 @@
 
 namespace LiteMVC\Db\Driver\Pdo;
 
-use LiteMVC\Db\Driver\AbstractDriver;
-
 class Mysql extends AbstractPdoDriver
 {
 
@@ -24,7 +22,8 @@ class Mysql extends AbstractPdoDriver
      *
      * @return boolean
      */
-    public function isAvailable() {
+    public function isAvailable()
+    {
         if (!extension_loaded('PDO')) {
             return false;
         }

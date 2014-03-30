@@ -189,7 +189,8 @@ class App implements ModuleInterface
 
         // Iterate director and remove contents
         $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST
+            new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS),
+            \RecursiveIteratorIterator::CHILD_FIRST
         );
         foreach ($iterator as $fileInfo) {
             echo Utils::colorise($fileInfo->getRealPath(), Utils::COLOR_LIGHT_CYAN) . PHP_EOL;

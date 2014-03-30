@@ -45,7 +45,7 @@ abstract class AbstractDriver extends AbstractResource
     /**
      * Get driver connection
      *
-     * @return Connection
+     * @return ConnectionInterface
      */
     abstract public function getConnection();
 

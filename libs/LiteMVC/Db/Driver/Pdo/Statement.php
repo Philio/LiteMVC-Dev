@@ -15,9 +15,9 @@
 namespace LiteMVC\Db\Driver\Pdo;
 
 use LiteMVC\Db\Driver\Exception;
-use LiteMVC\Db\Driver\Statement as DriverStatement;
+use LiteMVC\Db\Driver\StatementInterface;
 
-class Statement extends \PDOStatement implements DriverStatement
+class Statement extends \PDOStatement implements StatementInterface
 {
 
     /**

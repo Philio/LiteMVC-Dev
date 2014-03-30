@@ -14,7 +14,7 @@
 
 namespace LiteMVC\Db\Driver;
 
-interface Statement
+interface StatementInterface
 {
 
     /**

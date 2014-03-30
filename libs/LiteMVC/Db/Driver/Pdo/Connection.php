@@ -14,11 +14,11 @@
 
 namespace LiteMVC\Db\Driver\Pdo;
 
-use LiteMVC\Db\Driver\Connection as DriverConnection;
+use LiteMVC\Db\Driver\ConnectionInterface;
 use LiteMVC\Db\Driver\Exception;
-use LiteMVC\Db\Driver\Statement;
+use LiteMVC\Db\Driver\StatementInterface;
 
-class Connection implements DriverConnection
+class Connection implements ConnectionInterface
 {
 
     /**
@@ -82,7 +82,7 @@ class Connection implements DriverConnection
     /**
      * Connect to the database
      *
-     * @return Connection
+     * @return ConnectionInterface
      * @throws Exception
      */
     public function connect()
@@ -93,7 +93,7 @@ class Connection implements DriverConnection
             $this->_pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->_pdo->setAttribute(\PDO::ATTR_ORACLE_NULLS, \PDO::NULL_NATURAL);
             $this->_pdo->setAttribute(\PDO::ATTR_STRINGIFY_FETCHES, false);
-            $this->_pdo->setAttribute(\PDO::ATTR_STATEMENT_CLASS, array('\LiteMVC\Db\Driver\Pdo\Statement', array()));
+            $this->_pdo->setAttribute(\PDO::ATTR_STATEMENT_CLASS, array('LiteMVC\Db\Driver\Pdo\Statement', array()));
             $this->_pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             throw new Exception($e);
@@ -114,7 +114,7 @@ class Connection implements DriverConnection
     /**
      * Disconnect
      *
-     * @return Connection
+     * @return ConnectionInterface
      */
     public function disconnect()
     {
@@ -128,7 +128,7 @@ class Connection implements DriverConnection
      * Prepare a statement
      *
      * @param string $sql
-     * @return Statement
+     * @return StatementInterface
      * @throws Exception
      */
     public function prepare($sql)
@@ -150,7 +150,7 @@ class Connection implements DriverConnection
      * Execute query and return result as a statement
      *
      * @param string $sql
-     * @return Statement
+     * @return StatementInterface
      * @throws Exception
      */
     public function query($sql)

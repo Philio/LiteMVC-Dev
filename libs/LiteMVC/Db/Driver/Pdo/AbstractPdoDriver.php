@@ -23,14 +23,14 @@ abstract class AbstractPdoDriver extends AbstractDriver
     /**
      * Connection instance
      *
-     * @var Connection
+     * @var ConnectionInterface
      */
     private $_connection;
 
     /**
      * Get driver connection
      *
-     * @return Connection
+     * @return ConnectionInterface
      * @throws Exception
      */
     public function getConnection()

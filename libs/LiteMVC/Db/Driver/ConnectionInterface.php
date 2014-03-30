@@ -14,13 +14,13 @@
 
 namespace LiteMVC\Db\Driver;
 
-interface Connection
+interface ConnectionInterface
 {
 
     /**
      * Connect to the database
      *
-     * @return Connection
+     * @return ConnectionInterface
      */
     public function connect();
 
@@ -34,7 +34,7 @@ interface Connection
     /**
      * Disconnect
      *
-     * @return Connection
+     * @return ConnectionInterface
      */
     public function disconnect();
 
@@ -42,7 +42,7 @@ interface Connection
      * Prepare a statement
      *
      * @param string $sql
-     * @return Statement
+     * @return StatementInterface
      */
     public function prepare($sql);
 
@@ -50,7 +50,7 @@ interface Connection
      * Execute query and return result as a statement
      *
      * @param string $sql
-     * @return Statement
+     * @return StatementInterface
      */
     public function query($sql);
 

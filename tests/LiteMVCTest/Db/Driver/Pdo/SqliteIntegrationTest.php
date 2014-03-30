@@ -14,7 +14,7 @@
 
 namespace LiteMVCTest\Db\Driver\Pdo;
 
-use LiteMVC\Db\Driver\Pdo\Connection;
+use LiteMVC\Db\Driver\Pdo\ConnectionInterface;
 use LiteMVC\Db\Driver\Pdo\Sqlite;
 
 class SqliteIntegrationTest extends \PHPUnit_Framework_TestCase
@@ -68,7 +68,7 @@ class SqliteIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $connection = $this->getConnection();
         $statement = $connection->prepare("SELECT 1");
-        $this->assertInstanceOf('LiteMVC\Db\Driver\Statement', $statement);
+        $this->assertInstanceOf('LiteMVC\Db\Driver\StatementInterface', $statement);
     }
 
     public function testPrepareBadQuery()
@@ -82,7 +82,7 @@ class SqliteIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $connection = $this->getConnection();
         $statement = $connection->query("SELECT 1");
-        $this->assertInstanceOf('LiteMVC\Db\Driver\Statement', $statement);
+        $this->assertInstanceOf('LiteMVC\Db\Driver\StatementInterface', $statement);
     }
 
     public function testQueryBadQuery()

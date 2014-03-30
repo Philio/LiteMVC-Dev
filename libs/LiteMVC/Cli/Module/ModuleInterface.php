@@ -21,4 +21,5 @@ interface ModuleInterface
      * Show help for the module
      */
     public function showHelp();
+
 }

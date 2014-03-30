@@ -85,7 +85,7 @@ class Orm extends Resource\AbstractResource
         $result = $driver->query($select);
 
         // Map the result to the model
-        return $this->_mapToModel($model, $result);
+        return $result;
     }
 
     /**
@@ -166,19 +166,6 @@ class Orm extends Resource\AbstractResource
             throw new Exception('Model should inherit from AbstractModel');
         }
 
-        return $model;
-    }
-
-    /**
-     * @param AbstractModel $model
-     * @param AbstractResult $result
-     * @return AbstractModel
-     */
-    private function _mapToModel(AbstractModel $model, AbstractResult $result)
-    {
-        if (count($result) == 1) {
-
-        }
         return $model;
     }
 

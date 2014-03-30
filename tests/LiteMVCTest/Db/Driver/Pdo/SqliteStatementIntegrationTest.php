@@ -86,10 +86,28 @@ class SqliteStatementIntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($statement->execute(array('Some new test text')));
     }
 
-    public function testRowCount()
+    public function testExecuteWrongParamCount()
+    {
+        $this->setExpectedException('LiteMVC\Db\Driver\Exception');
+        $statement = $this->_connection->prepare("UPDATE test SET test_text = ? WHERE id = 1");
+        $statement->execute(array('Some new test text', 'Some more new test text'));
+    }
+
+    public function testRowCountUpdate()
     {
         $statement = $this->_connection->query("UPDATE test SET test_text = 'Some new test text' WHERE id = 1");
         $this->assertEquals(1, $statement->rowCount());
+    }
+    public function testRowCountInsert()
+    {
+        $statement = $this->_connection->query("INSERT INTO test VALUES (null, 321, 321.123, 'Insert test')");
+        $this->assertEquals(1, $statement->rowCount());
+    }
+
+    public function testRowCountDelete()
+    {
+        $statement = $this->_connection->query("DELETE FROM test");
+        $this->assertEquals(2, $statement->rowCount());
     }
 
     public function testColumnCount()
@@ -102,6 +120,7 @@ class SqliteStatementIntegrationTest extends \PHPUnit_Framework_TestCase
         $statement = $this->_connection->query("SELECT * FROM test");
         $this->assertEquals($this->_data[0], $statement->fetch());
         $this->assertEquals($this->_data[1], $statement->fetch());
+        $this->assertFalse($statement->fetch());
     }
 
     public function testFetchAll()
@@ -120,6 +139,28 @@ class SqliteStatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $statement = $this->_connection->prepare("UPDATE test SET test_text = ? WHERE id = 1");
         $this->assertTrue($statement->execute(array('Some new test text')));
+        $queryStatement = $this->_connection->query("SELECT test_text FROM test WHERE id = 1");
+        $data = $queryStatement->fetch();
+        $this->assertEquals('Some new test text', $data['test_text']);
+    }
+
+    public function testUpdateBindParam()
+    {
+        $statement = $this->_connection->prepare("UPDATE test SET test_text = ? WHERE id = 1");
+        $variable = 'Some new test text';
+        $this->assertTrue($statement->bindParam(1, $variable));
+        $variable = 'Some edited test text';
+        $this->assertTrue($statement->execute());
+        $queryStatement = $this->_connection->query("SELECT test_text FROM test WHERE id = 1");
+        $data = $queryStatement->fetch();
+        $this->assertEquals($variable, $data['test_text']);
+    }
+
+    public function testUpdateBindValue()
+    {
+        $statement = $this->_connection->prepare("UPDATE test SET test_text = ? WHERE id = 1");
+        $this->assertTrue($statement->bindValue(1, 'Some new test text'));
+        $this->assertTrue($statement->execute());
         $queryStatement = $this->_connection->query("SELECT test_text FROM test WHERE id = 1");
         $data = $queryStatement->fetch();
         $this->assertEquals('Some new test text', $data['test_text']);

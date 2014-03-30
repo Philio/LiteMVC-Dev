@@ -37,7 +37,7 @@ class Statement extends \PDOStatement implements DriverStatement
      * @return boolean
      * @throws Exception
      */
-    public function bindParam($param, &$variable, $type = null, $length = null)
+    public function bindParam($param, &$variable, $type = \PDO::PARAM_STR, $length = null)
     {
         try {
             return parent::bindParam($param, $variable, $type, $length);
@@ -55,7 +55,7 @@ class Statement extends \PDOStatement implements DriverStatement
      * @return boolean
      * @throws Exception
      */
-    public function bindValue($param, $value, $type = null)
+    public function bindValue($param, $value, $type = \PDO::PARAM_STR)
     {
         try {
             return parent::bindValue($param, $value, $type);

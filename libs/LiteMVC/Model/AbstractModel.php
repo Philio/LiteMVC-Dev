@@ -85,7 +85,7 @@ abstract class AbstractModel extends Resource\AbstractDataset
      *
      * @var array
      */
-    private $_originalData = array();
+    protected $_originalData = array();
 
     /**
      * Get database name
